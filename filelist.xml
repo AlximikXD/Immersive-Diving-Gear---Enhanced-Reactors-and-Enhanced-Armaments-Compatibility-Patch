@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentpackage name="Immersive Diving Gear - Enhanced Reactors and Enhanced Armaments Compatibility Patch" modversion="1.0.0" corepackage="False" steamworkshopid="3342415519" gameversion="1.5.9.2">
+  <Item file="%ModDir%/Content/Items/Diving/divinggear_helmets.xml" />
+  <Item file="%ModDir%/Content/Items/Diving/divinggear_suits.xml" />
+</contentpackage>
