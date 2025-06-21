@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Items>
   <Override>
-    <Item name="" identifier="scp_renegadedivingsuit" variantof="divingsuitpreset5750" category="Diving" subcategory="Renegade" tags="diving,deepdiving,provocative,divingsuit" scale="0.5" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" hideinmenus="false">
+    <Item name="" identifier="scp_renegadedivingsuit" variantof="divingsuitpreset6000" category="Diving" subcategory="Renegade" tags="diving,deepdiving,provocative,divingsuit" scale="0.5" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" hideinmenus="false">
       <Price baseprice="500" soldeverywhere="false"></Price>
       <PreferredContainer primary="divingsuitcontainer" />
       <Deconstruct time="30">
@@ -36,13 +36,13 @@
         <sprite name="Renegade Diving Suit Left Leg" texture="%ModDir:2764968387%/Jobgear/renegadesuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
         <sprite name="Renegade Diving Suit Left Shoe" texture="%ModDir:2764968387%/Jobgear/renegadesuit.png" limb="LeftFoot" sound="footstep_armor_heavy" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
         <sprite name="Renegade Diving Suit Right Shoe" texture="%ModDir:2764968387%/Jobgear/renegadesuit.png" limb="RightFoot" sound="footstep_armor_heavy" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,bitewounds,lacerations" damagemultiplier="0.75" damagesound="armourmedimpact" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="gunshotwound" damagemultiplier="0.6" damagesound="armourmedimpact" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="bleeding" damagemultiplier="0.5" damagesound="" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.7" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.7" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,burn" damagemultiplier="0.7" damagesound="armourmedimpact" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="armourmedimpact" />
+      <StatValue stattype="WalkingSpeed" value="-0.05" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,bleeding" damagemultiplier="0.75" damagesound="armourmedimpact" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="gunshotwound" damagemultiplier="0.6" damagesound="armourmedimpact" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage" damagemultiplier="0.9" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="bitewounds,lacerations" damagemultiplier="0.85" damagesound="" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,burn,contaminated,overheating" damagemultiplier="0.8" damagesound="armourmedimpact" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="armourmedimpact" />
       </Wearable>
       <ItemComponent canbeselected="false" allowingameediting="false">
         <StatusEffect type="OnWearing" target="Character" PropulsionSpeedMultiplier="1.45" setvalue="true" disabledeltatime="true" />
@@ -75,34 +75,34 @@
     </Item>
   </Override>
   <Override>
-    <Item name="" identifier="scp_combathardsuit" variantof="divingsuitpreset5750" description="" category="Diving" subcategory="Coalition" tags="diving,deepdiving,provocative,divingsuit" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" hideinmenus="false">
+    <Item name="" identifier="scp_combathardsuit" variantof="divingsuitpreset6650" description="" category="Diving" subcategory="Coalition" tags="diving,deepdiving,provocative,divingsuit" scale="0.5" fireproof="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" hideinmenus="false">
       <PreferredContainer primary="divingsuitcontainer" />
-      <Price baseprice="5000" displaynonempty="true" minleveldifficulty="55">
-        <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
-        <Price storeidentifier="merchantcity" multiplier="1.25" sold="false" />
-        <Price storeidentifier="merchantresearch" sold="false" multiplier="1.25" />
-        <Price storeidentifier="merchantmilitary" multiplier="0.95" minavailable="0" maxavailable="1">
-          <Reputation faction="coalition" min="100" />
-        </Price>
-        <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
-        <Price storeidentifier="merchantarmory" multiplier="0.95" minavailable="0" maxavailable="1">
-          <Reputation faction="coalition" min="100" />
-        </Price>
-      </Price>
+		<Price baseprice="4000" displaynonempty="true" minleveldifficulty="35">
+		  <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
+		  <Price storeidentifier="merchantcity" multiplier="1.25" sold="false" />
+		  <Price storeidentifier="merchantresearch" sold="false" multiplier="1.25" />
+		  <Price storeidentifier="merchantmilitary" multiplier="0.95" minavailable="0" maxavailable="1">
+			<Reputation faction="coalition" min="100" />
+		  </Price>
+		  <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
+		  <Price storeidentifier="merchantarmory" multiplier="0.95" minavailable="0" maxavailable="1">
+			<Reputation faction="coalition" min="100" />
+		  </Price>
+		</Price>
       <PreferredContainer primary="divingsuitcontainer" />
       <Deconstruct time="30">
         <Item identifier="scp_durasteel" amount="2" />
         <Item identifier="titaniumaluminiumalloy" amount="2" />
         <Item identifier="rubber" amount="2" />
       </Deconstruct>
-      <Fabricate suitablefabricators="fabricator" requiredtime="60">
-        <RequiredSkill identifier="mechanical" level="65" />
-        <RequiredSkill identifier="weapons" level="75" />
-        <RequiredItem identifier="abyssdivingsuit" />
-        <RequiredItem identifier="titaniumaluminiumalloy" amount="4" />
-        <RequiredItem identifier="scp_durasteel" amount="8" />
-        <RequiredItem identifier="rubber" amount="6" />
-      </Fabricate>
+    <Fabricate suitablefabricators="fabricator" requiredtime="60">
+      <RequiredSkill identifier="mechanical" level="65" />
+      <RequiredSkill identifier="weapons" level="75" />
+      <RequiredItem identifier="abyssdivingsuit" />
+      <RequiredItem identifier="titaniumaluminiumalloy" amount="4" />
+      <RequiredItem identifier="scp_durasteel" amount="8" />
+      <RequiredItem identifier="rubber" amount="6" />
+    </Fabricate>
       <InventoryIcon texture="%ModDir:2764968387%/jobgear/combathardsuititems.png" sourcerect="312,0,109,107" origin="0.5,0.5" />
       <Sprite name="combathardsuit Item" texture="%ModDir:2764968387%/jobgear/combathardsuititems.png" sourcerect="68,188,157,85" depth="0.55" origin="0.5,0.5" />
       <ContainedSprite name="combathardsuit In Vertical Locker" allowedcontainertags="divingsuitcontainervertical" texture="%ModDir:2764968387%/jobgear/combathardsuititems.png" sourcerect="181,0,70,192" depth="0.55" origin="0.5,0.5" />
@@ -124,11 +124,9 @@
         <sprite name="combathardsuit Left Leg" texture="%ModDir:2764968387%/jobgear/combathardsuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
         <sprite name="combathardsuit Left Shoe" texture="%ModDir:2764968387%/jobgear/combathardsuit.png" limb="LeftFoot" sound="heavysuitfootstep" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
         <sprite name="combathardsuit Right Shoe" texture="%ModDir:2764968387%/jobgear/combathardsuit.png" limb="RightFoot" sound="heavysuitfootstep" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,blunttrauma" damagemultiplier="0.1" damagesound="armourheavyimpact" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="gunshotwound,bleeding,explosiondamage,burn" damagemultiplier="0.2" damagesound="armourheavyimpact" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,bitewounds,stun" damagemultiplier="0.5" damagesound="armourheavyimpact" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,blunttrauma" damagemultiplier="0.1" damagesound="armourheavyimpact" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="gunshotwound,bleeding,explosiondamage,burn" damagemultiplier="0.25" damagesound="armourheavyimpact" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,bitewounds,stun,contaminated,overheating" damagemultiplier="0.5" damagesound="armourheavyimpact" />
         <sound file="Content/Items/Weapons/WEAPONS_chargeUp.ogg" type="OnWearing" range="500.0" volumeproperty="Speed" volume="0.15" loop="true" frequencymultiplier="0.75" />
         <SkillModifier skillidentifier="weapons" skillvalue="-10" />
         <SkillModifier skillidentifier="mechanical" skillvalue="-50" />
@@ -138,12 +136,15 @@
         <StatusEffect type="OnWearing" target="Contained" Condition="-0.25" interval="1" disabledeltatime="true" targetslot="1">
           <RequiredItem items="mobilebattery" targetslot="1" type="Contained" />
         </StatusEffect>
+      <StatusEffect type="OnWearing" target="Character" interval="0.9" disabledeltatime="true">
+        <Affliction identifier="recoilstabilized" amount="1" />
+      </StatusEffect>
         <!-- reduce walking speed if out of power -->
         <StatusEffect type="OnWearing" target="This,Character" SpeedMultiplier="0.1" setvalue="true" interval="0.2" duration="0.2" disabledeltatime="true">
           <Conditional HasStatusTag="neq powered" />
         </StatusEffect>
         <!-- increase walking speed if powered -->
-        <StatusEffect type="OnWearing" target="This,Character" SpeedMultiplier="0.7" setvalue="true" interval="0.2" duration="0.2" disabledeltatime="true">
+        <StatusEffect type="OnWearing" target="This,Character" SpeedMultiplier="0.7" PropulsionSpeedMultiplier="0.5"  setvalue="true" interval="0.2" duration="0.2" disabledeltatime="true">
           <Conditional HasStatusTag="eq powered" />
         </StatusEffect>
         <!-- block hull oxygen usage -->
@@ -208,266 +209,11 @@
     </Item>
   </Override>
   <Override>
-    <Item name="" identifier="scp_heavyhazmatuniform" category="Equipment" subcategory="Renegade" tags="smallitem,clothing" fireproof="true" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
-      <PreferredContainer primary="engcab,storagecab" minamount="0" maxamount="1" spawnprobability="0.03" notcampaign="true" />
-      <PreferredContainer primary="wreckstoragecab,wreckengcab" minamount="0" maxamount="1" spawnprobability="0.05" minleveldifficulty="10" />
-      <Price baseprice="800" displaynonempty="true" minleveldifficulty="15">
-        <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
-        <Price storeidentifier="merchantcity" multiplier="1.25" sold="false" />
-        <Price storeidentifier="merchantresearch" minavailable="0" maxavailable="2" multiplier="0.85" />
-        <Price storeidentifier="merchantmilitary" multiplier="1" sold="false" />
-        <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
-        <Price storeidentifier="merchantarmory" multiplier="1" sold="false" />
-        <Price storeidentifier="merchantengineering" multiplier="0.9" minavailable="2" />
-      </Price>
-      <Fabricate suitablefabricators="fabricator" requiredtime="35">
-        <RequiredSkill identifier="mechanical" level="25" />
-        <RequiredSkill identifier="electrical" level="45" />
-        <Item identifier="lead" amount="4" />
-        <Item identifier="orangejumpsuit1" />
-        <Item identifier="scp_hardeneddivingmask" />
-      </Fabricate>
-      <Deconstruct time="20">
-        <Item identifier="lead" />
-        <Item identifier="lead" />
-        <Item identifier="lead" />
-      </Deconstruct>
-      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="tank">
-        <Containable items="oxygensource,weldingtoolfuel" />
-      </ItemContainer>
-      <InventoryIcon name="heavyhazmatinv" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" sourcerect="677,0,78,67" origin="0.5,0.5" />
-      <Sprite name="heavyhazmatground" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" sourcerect="640,69,115,62" depth="0.6" origin="0.5,0.5" />
-      <Body width="180" height="50" density="30" friction="0.8" restitution="0.01" />
-      <Wearable slots="Any,InnerClothes+Head" msg="ItemMsgPickUpSelect">
-        <sprite name="HAZMAT helm Wearable" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.77" hidewearablesoftype="hair,beard" sourcerect="678,13,88,86" origin="0.5065703,0.5108439" />
-        <sprite name="Heavy HAZMAT Torso" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Right Hand" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Left Hand" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Right Lower Arm" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Left Lower Arm" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Right Upper Arm" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Left Upper Arm" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Waist" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Right Thigh" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Left Thigh" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Right Leg" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Left Leg" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Left Shoe" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="Heavy HAZMAT Right Shoe" texture="%ModDir:2764968387%/Jobgear/heavyhazmat.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="scp_presolatexinfection" damagemultiplier="0" probabilitymultiplier="0" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.0" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.3" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lethalradiation" damagemultiplier="0.45" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="acidburn,burn" damagemultiplier="0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,gunshotwound" damagemultiplier="0.85" />
-        <SkillModifier skillidentifier="electrical" skillvalue="10" />
-        <SkillModifier skillidentifier="weapons" skillvalue="-10" />
-        <SkillModifier skillidentifier="mechanical" skillvalue="-10" />
-        <StatValue stattype="WalkingSpeed" value="-0.15" />
-        <StatValue stattype="SwimmingSpeed" value="-0.1" />
-        <StatusEffect tags="cbrnsuit" type="OnWearing" target="Character" duration="1" stackable="false" setvalue="true" />
-        <StatusEffect type="OnWearing" target="Character" HideFace="true" disabledeltatime="true" ObstructVisionAmount="0.5">
-          <Conditional IsDead="false" />
-          <Sound file="%ModDir%/Sounds/maskloop.ogg" range="450" loop="true" frequencymultiplier="0.95" volume="1.1" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1000.0" Condition="-0.25" comparison="Or">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygentank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1500.0" Condition="-0.1" comparison="Or">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygenitetank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" SpeedMultiplier="1.2" setvalue="true" comparison="Or">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygenitetank" type="Contained" />
-        </StatusEffect>
-      </Wearable>
-    </Item>
-  </Override>
-  <Override>
-    <Item name="CBRN Suit" identifier="scp_cbrnsuit" description="" category="Equipment" subcategory="Coalition" cargocontaineridentifier="metalcrate" tags="smallitem,clothing" scale="0.5" impactsoundtag="impact_soft">
-      <PreferredContainer primary="armcab" minamount="0" maxamount="1" spawnprobability="0.1" />
-      <Price baseprice="600" displaynonempty="true" minleveldifficulty="15">
-        <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
-        <Price storeidentifier="merchantcity" multiplier="1.25" sold="false" />
-        <Price storeidentifier="merchantresearch" sold="false" multiplier="1.25" />
-        <Price storeidentifier="merchantmilitary" multiplier="1" minavailable="0" maxavailable="2" />
-        <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
-        <Price storeidentifier="merchantarmory" multiplier="1" minavailable="0" maxavailable="2" />
-      </Price>
-      <Deconstruct time="10">
-        <Item identifier="ballisticfiber" />
-        <Item identifier="lead" />
-        <Item identifier="rubber" />
-      </Deconstruct>
-      <Fabricate suitablefabricators="fabricator" requiredtime="35">
-        <RequiredSkill identifier="weapons" level="40" />
-        <RequiredItem identifier="scp_lightuniform" />
-        <RequiredItem identifier="scp_hardeneddivingmask" />
-        <RequiredItem identifier="rubber" amount="4" />
-        <RequiredItem identifier="lead" amount="2" />
-      </Fabricate>
-      <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
-        <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
-        <SubContainer capacity="1" maxstacksize="1">
-          <Containable items="oxygensource,weldingtoolfuel" />
-        </SubContainer>
-        <SubContainer capacity="2" maxstacksize="8" slotindex="1">
-          <Containable items="smallitem,ammo" excludeditems="clothing,toolbox,mobilecontainer,rucksack,backpack,waistbelt,vest,backpack1,medicalbackpack,power-backpack,duffelbag,heavybackpack,oxy-gen. backpack,xeno-backpack,techno-backpack"></Containable>
-        </SubContainer>
-      </ItemContainer>
-      <InventoryIcon name="cbrnsuitinv" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" sourcerect="619,-3,69,63" origin="0.5,0.5" />
-      <Sprite name="cbrnsuitground" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" sourcerect="544,65,162,73" depth="0.6" origin="0.5,0.5" />
-      <Body width="180" height="50" density="30" friction="0.8" restitution="0.01" />
-      <Wearable slots="Any,InnerClothes+Head" msg="ItemMsgPickUpSelect">
-        <sprite name="CBRN helmet" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.77" hidelimb="true" hideotherwearables="true" sourcerect="675,107,88,86" origin="0.5,0.51" />
-        <sprite name="CBRN Torso" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="CBRN Uniform Right Hand" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="CBRN Uniform Left Hand" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="CBRN Uniform Right Lower Arm" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Left Lower Arm" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Right Upper Arm" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Left Upper Arm" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Waist" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Right Thigh" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Left Thigh" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Right Leg" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Left Leg" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Left Shoe" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <sprite name="Heavy Uniform Right Shoe" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="scp_presolatexinfection" damagemultiplier="0" probabilitymultiplier="0" />
-        <damagemodifier afflictionidentifiers="acidburn,burn" armorsector="0.0,360.0" damagemultiplier="0.1" damagesound="LimbArmor" deflectprojectiles="true" />
-        <damagemodifier afflictionidentifiers="radiationsickness" armorsector="0.0,360.0" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.5" />
-        <damagemodifier afflictiontypes="alieninfection" armorsector="0.0,360.0" damagemultiplier="0.75" probabilitymultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
-        <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound" armorsector="0.0,360.0" damagemultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
-        <damagemodifier afflictionidentifiers="bleeding" armorsector="0.0,360.0" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true" />
-        <SkillModifier skillidentifier="weapons" skillvalue="-5" />
-        <SkillModifier skillidentifier="mechanical" skillvalue="-10" />
-        <SkillModifier skillidentifier="electrical" skillvalue="-10" />
-        <StatValue stattype="WalkingSpeed" value="-0.1" />
-        <StatValue stattype="SwimmingSpeed" value="-0.1" />
-        <StatusEffect tags="cbrnsuit" type="OnWearing" target="Character" duration="1" stackable="false" setvalue="true" />
-        <StatusEffect type="OnWearing" target="Character" HideFace="true" disabledeltatime="true" />
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1000.0" Condition="-0.25" comparison="Or" targetslot="0">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygentank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="-100.0" Oxygen="-5.0" Condition="-5.0" targetslot="0">
-          <Conditional IsDead="false" />
-          <RequiredItem items="weldingfueltank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="-100.0" Oxygen="-7.0" Condition="-5.0" targetslot="0">
-          <RequiredItem items="incendiumfueltank" type="Contained" />
-          <Affliction identifier="burn" amount="0.1" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1500.0" Condition="-0.1" comparison="Or" targetslot="0">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygenitetank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" SpeedMultiplier="1.2" setvalue="true" comparison="Or" targetslot="0">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygenitetank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Character" setvalue="true" disabledeltatime="true" ObstructVisionAmount="0.5"></StatusEffect>
-      </Wearable>
-    </Item>
-  </Override>
-  <Override>
-    <Item name="" identifier="scp_liquidatorsuit" category="Equipment" subcategory="Renegade" tags="smallitem,clothing" fireproof="true" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
-      <PreferredContainer primary="storagecab" />
-      <PreferredContainer primary="wreckstoragecab,wreckengcab" minamount="0" maxamount="1" spawnprobability="0.007" minleveldifficulty="35" />
-      <Price baseprice="2000" sold="false"></Price>
-      <Fabricate suitablefabricators="fabricator" requiredtime="35">
-        <RequiredSkill identifier="mechanical" level="50" />
-        <RequiredSkill identifier="electrical" level="85" />
-        <Item identifier="scp_heavyhazmatuniform" />
-        <Item identifier="scp_durasteel" amount="2" />
-        <Item identifier="lead" amount="8" />
-        <Item identifier="dementonite" amount="8" />
-      </Fabricate>
-      <Deconstruct time="20">
-        <Item identifier="lead" amount="2" />
-        <Item identifier="dementonite" amount="2" />
-      </Deconstruct>
-      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="tank">
-        <Containable items="oxygensource,weldingtoolfuel" />
-      </ItemContainer>
-      <InventoryIcon name="highperfhazmatinv" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" sourcerect="677,0,78,67" origin="0.5,0.5" />
-      <Sprite name="highperfhazmatground" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" sourcerect="640,69,115,62" depth="0.6" origin="0.5,0.5" />
-      <Body width="180" height="50" density="30" friction="0.8" restitution="0.01" />
-      <Wearable slots="Any,InnerClothes+Head" msg="ItemMsgPickUpSelect">
-        <sprite name="highperfhazmat helm Wearable" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.82" hidewearablesoftype="hair,beard" sourcerect="689,271,88,86" origin="0.59,0.51" />
-        <sprite name="highperfhazmat Torso" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Right Hand" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Left Hand" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Right Lower Arm" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Left Lower Arm" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Right Upper Arm" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Left Upper Arm" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Waist" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Right Thigh" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Left Thigh" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Right Leg" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Left Leg" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Left Shoe" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <sprite name="highperfhazmat Right Shoe" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="scp_presolatexinfection,acidburn,scp_hexgasdamage,scp_ae035damage" damagemultiplier="0" probabilitymultiplier="0" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,burn" damagemultiplier="0.03" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.1" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.0" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,bitewounds,gunshotwound" damagemultiplier="0.7" />
-        <SkillModifier skillidentifier="electrical" skillvalue="10" />
-        <SkillModifier skillidentifier="weapons" skillvalue="-15" />
-        <StatValue stattype="WalkingSpeed" value="-0.15" />
-        <StatValue stattype="SwimmingSpeed" value="-0.2" />
-        <StatusEffect tags="cbrnsuit" type="OnWearing" target="Character" duration="1" stackable="false" setvalue="true" />
-        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" UseHullOxygen="false" />
-        <StatusEffect type="OnWearing" target="Character" HideFace="true" disabledeltatime="true" />
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1000.0" Condition="-0.1" comparison="Or">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygentank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="-100.0" Oxygen="-5.0" Condition="-5.0">
-          <Conditional IsDead="false" />
-          <RequiredItem items="weldingfueltank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="-100.0" Oxygen="-7.0" Condition="-5.0">
-          <RequiredItem items="incendiumfueltank" type="Contained" />
-          <Affliction identifier="burn" amount="0.1" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" OxygenAvailable="1500.0" Condition="-0.05" comparison="Or">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygenitetank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained,Character" SpeedMultiplier="1.2" setvalue="true" comparison="Or">
-          <Conditional IsDead="false" />
-          <RequiredItem items="oxygenitetank" type="Contained" />
-        </StatusEffect>
-        <StatusEffect type="OnWearing" target="Character" setvalue="true" disabledeltatime="true" ObstructVision="true" HideFace="true" PressureProtection="4500.0"></StatusEffect>
-        <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
-          <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
-          <Conditional condition="lte 5.0" />
-          <Sound file="%ModDir:2764968387%/Sounds/suitalarm.ogg" range="300" volume="0.3" />
-        </StatusEffect>
-      </Wearable>
-    </Item>
-  </Override>
-  <Override>
-    <Item name="" identifier="scp_interceptorsuit" variantof="divingsuitpreset5750" category="Diving,Equipment" tags="diving,deepdiving,provocative" scale="0.5" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="2" hideinmenus="false">
-      <Price baseprice="2500" minleveldifficulty="40">
-        <Price storeidentifier="merchantoutpost" sold="false" multiplier="0.9" />
-        <Price storeidentifier="merchantcity" multiplier="0.85" sold="false" />
-        <Price storeidentifier="merchantresearch" sold="false" />
-        <Price storeidentifier="merchantmilitary" maxavailable="1" />
-        <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
-        <Price storeidentifier="merchantarmory" multiplier="0.85" maxavailable="1" />
-      </Price>
+    <Item name="" identifier="scp_interceptorsuit" variantof="divingsuitpreset6000" category="Diving,Equipment" tags="diving,deepdiving,provocative" scale="0.5" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="2" hideinmenus="false">
+      <Price baseprice="2500" sold="false"></Price>
       <PreferredContainer primary="divingsuitcontainer" />
-      <PreferredContainer primary="piratedivingsuitcontainer" spawnprobability="1" minleveldifficulty="35" />
-      <PreferredContainer primary="wreckdivingsuitcontainer" spawnprobability="0.05" minleveldifficulty="35" />
+      <PreferredContainer primary="piratedivingsuitcontainer" spawnprobability="0.01" minleveldifficulty="35" />
+      <PreferredContainer primary="wreckdivingsuitcontainer" spawnprobability="0.006" minleveldifficulty="35" />
       <Deconstruct time="30">
         <Item identifier="scp_durasteel" />
         <Item identifier="dementonite" amount="3" />
@@ -485,6 +231,32 @@
       <ContainedSprite name="intercepsuit Suit In Vertical Locker" allowedcontainertags="divingsuitcontainervertical" texture="%ModDir:2764968387%/Jobgear/interceptsuititems.png" sourcerect="174,0,70,192" depth="0.55" origin="0.5,0.5" />
       <ContainedSprite name="intercepsuit Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir:2764968387%/Jobgear/interceptsuit.png" sourcerect="432,0,80,207" depth="0.55" origin="-0.12,-0.14" />
       <ContainedSprite name="intercepsuit Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir:2764968387%/Jobgear/interceptsuititems.png" sourcerect="0,193,230,63" depth="0.55" origin="0.6,0.5" />
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0">
+        <StatusEffect type="OnWearing" target="This,Character" interval="0.2" duration="0.2" OxygenAvailable="-100.0" UseHullOxygen="false" comparison="And">
+          <Conditional HasStatusTag="eq sealed" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="0.95" PropulsionSpeedMultiplier="1.4" setvalue="true" interval="0.2" duration="0.2" disabledeltatime="true" />
+        <StatusEffect type="OnContained" target="Contained" targetslot="0" Condition="1.0" interval="1" disabledeltatime="true">
+          <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+          <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" excludefullcondition="true" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" targetslot="0" OxygenAvailable="1000.0" Condition="-0.3" comparison="And">
+          <Conditional IsDead="false" />
+          <Conditional HasStatusTag="eq sealed" />
+          <RequiredItem items="oxygensource" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" targetslot="0" Condition="-0.5" interval="1" disabledeltatime="true" comparison="And">
+          <Conditional IsDead="false" />
+          <Conditional HasStatusTag="eq sealed" />
+          <RequiredItem items="weldingfueltank" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" targetslot="0" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" comparison="And">
+          <Conditional IsDead="false" />
+          <Conditional HasStatusTag="eq sealed" />
+          <RequiredItem items="incendiumfueltank" type="Contained" />
+          <Affliction identifier="burn" amount="3.0" />
+        </StatusEffect>
+      </GreaterComponent>
       <Wearable>
         <sprite name="intercepsuit Suit Torso" texture="%ModDir:2764968387%/Jobgear/interceptsuit.png" limb="Torso" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,680,256" origin="0.5,0.5" />
         <sprite name="intercepsuit Suit Right Hand" texture="%ModDir:2764968387%/Jobgear/interceptsuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,0,0" origin="0.5,0.5" />
@@ -500,19 +272,326 @@
         <sprite name="intercepsuit Suit Left Leg" texture="%ModDir:2764968387%/Jobgear/interceptsuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,0,0" origin="0.5,0.5" />
         <sprite name="intercepsuit Suit Left Shoe" texture="%ModDir:2764968387%/Jobgear/interceptsuit.png" limb="LeftFoot" sound="footstep_armor_heavy" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,0,0" origin="0.5,0.5" />
         <sprite name="intercepsuit Suit Right Shoe" texture="%ModDir:2764968387%/Jobgear/interceptsuit.png" limb="RightFoot" sound="footstep_armor_heavy" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,0,0" origin="0.5,0.5" />
-        <StatusEffect type="OnWearing" target="Character" PropulsionSpeedMultiplier="1.4" setvalue="true" disabledeltatime="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,gunshotwound,bitewounds,lacerations,bleeding" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.5" damagesound="" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.6" damagesound="LimbArmor" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.6" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.6" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" probabilitymultiplier="0.5" damagesound="LimbArmor" />
+		<damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage" damagemultiplier="0.75" damagesound="LimbArmor" deflectprojectiles="true" />
+		<damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,gunshotwound,bitewounds,lacerations,bleeding" damagemultiplier="0.6" damagesound="LimbArmor" deflectprojectiles="true" />
+		<damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.5" damagesound="" deflectprojectiles="true" />
+		<damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,contaminated,overheating" damagemultiplier="0.6" damagesound="LimbArmor" />
+		<damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" probabilitymultiplier="0.5" damagesound="LimbArmor" />
         <StatValue stattype="SwimmingSpeed" value="0.5" />
         <StatValue stattype="WalkingSpeed" value="-0.1" />
       </Wearable>
-      <ItemComponent canbeselected="false" allowingameediting="false">
-        <StatusEffect type="OnWearing" target="Character" PropulsionSpeedMultiplier="1.4" setvalue="true" disabledeltatime="true" />
-      </ItemComponent>
     </Item>
+  </Override>
+  <Override>
+  <Item name="" identifier="scp_liquidatorsuit" category="Equipment" subcategory="Renegade" tags="smallitem,clothing" fireproof="true" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
+    <PreferredContainer primary="storagecab" />
+    <PreferredContainer primary="wreckstoragecab,wreckengcab" minamount="0" maxamount="1" spawnprobability="0.007" minleveldifficulty="35" />
+    <Price baseprice="2000" sold="false"></Price>
+    <Fabricate suitablefabricators="fabricator" requiredtime="35">
+      <RequiredSkill identifier="mechanical" level="50" />
+      <RequiredSkill identifier="electrical" level="85" />
+      <Item identifier="scp_heavyhazmatuniform" />
+      <Item identifier="scp_durasteel" amount="2" />
+      <Item identifier="lead" amount="8" />
+      <Item identifier="dementonite" amount="8" />
+    </Fabricate>
+    <Deconstruct time="20">
+      <Item identifier="lead" amount="2" />
+      <Item identifier="dementonite" amount="2" />
+    </Deconstruct>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="tank">
+      <Containable items="oxygensource,weldingtoolfuel" excludeditems="oxygenitetank" />
+      <Containable items="oxygensource">
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" />
+        <StatusEffect type="OnWearing" target="Contained" Condition="-0.1" comparison="And">
+          <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+        </StatusEffect>
+      </Containable>
+      <Containable items="oxygenitetank">
+        <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.2" setvalue="true" targetslot="0" comparison="And">
+          <Conditional IsDead="false" />
+          <Conditional DecreasedOxygenConsumption="lt 99" />
+          <Conditional NeedsAir="true" />
+        </StatusEffect>
+      </Containable>
+      <Containable items="weldingfueltank" blameequipperfordeath="true">
+        <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+          <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" Oxygen="-5.0" comparison="And">
+          <Conditional IsDead="false" />
+          <Conditional DecreasedOxygenConsumption="lt 99" />
+          <Conditional NeedsAir="true" />
+        </StatusEffect>
+      </Containable>
+      <Containable items="incendiumfueltank" blameequipperfordeath="true">
+        <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+          <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" comparison="And" targetlimb="Torso">
+          <Affliction identifier="burn" amount="20.0" />
+          <Conditional IsDead="false" />
+          <Conditional DecreasedOxygenConsumption="lt 99" />
+          <Conditional NeedsAir="true" />
+        </StatusEffect>
+      </Containable>
+      <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+        <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+        <Conditional condition="lte 5.0" />
+        <Sound file="%ModDir:2764968387%/Sounds/suitalarm.ogg" range="300" volume="0.3" loop="true" />
+      </StatusEffect>
+    </ItemContainer>
+    <InventoryIcon name="highperfhazmatinv" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" sourcerect="677,0,78,67" origin="0.5,0.5" />
+    <Sprite name="highperfhazmatground" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" sourcerect="640,69,115,62" depth="0.6" origin="0.5,0.5" />
+    <Body width="180" height="50" density="30" friction="0.8" restitution="0.01" />
+    <Wearable slots="Any,InnerClothes+Head+OuterClothes" msg="ItemMsgPickUpSelect">
+      <sprite name="highperfhazmat helm Wearable" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.82" hidewearablesoftype="hair,beard" sourcerect="689,271,87,85" origin="0.59,0.51" />
+      <sprite name="highperfhazmat Torso" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Right Hand" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Left Hand" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Right Lower Arm" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Left Lower Arm" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Right Upper Arm" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Left Upper Arm" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Waist" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Right Thigh" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Left Thigh" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Right Leg" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Left Leg" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Left Shoe" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="highperfhazmat Right Shoe" texture="%ModDir:2764968387%/Jobgear/highperfhazmat.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="scp_presolatexinfection,scp_hexgasdamage" damagemultiplier="0" probabilitymultiplier="0" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,contaminated,overheating" damagemultiplier="0.05" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="acidburn,burn" damagemultiplier="0.1" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,gunshotwound,bitewounds" damagemultiplier="0.75" />
+      <SkillModifier skillidentifier="electrical" skillvalue="10" />
+      <SkillModifier skillidentifier="weapons" skillvalue="-35" />
+      <StatValue stattype="WalkingSpeed" value="-0.15" />
+      <StatValue stattype="SwimmingSpeed" value="-0.1" />
+      <StatusEffect tags="sealed" type="OnWearing" target="Character" duration="1" stackable="false" setvalue="true" />
+      <StatusEffect tags="cbrnsuit" type="OnWearing" target="Character" duration="1" stackable="false" setvalue="true" />
+      <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" UseHullOxygen="false" />
+      <StatusEffect type="OnWearing" target="Character" HideFace="true" disabledeltatime="true" ObstructVisionAmount="0.8" PressureProtection="6500.0" />
+    </Wearable>
+  </Item>
+  </Override>
+  <Override>
+  <Item name="" identifier="scp_heavyhazmatuniform" category="Equipment" subcategory="Renegade" tags="smallitem,clothing" fireproof="true" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
+    <PreferredContainer primary="armcab" />
+    <PreferredContainer primary="wreckstoragecab,wreckengcab" minamount="0" maxamount="1" spawnprobability="0.02" minleveldifficulty="10" />
+    <Price baseprice="800" displaynonempty="true" minleveldifficulty="15">
+      <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
+      <Price storeidentifier="merchantcity" multiplier="1.25" sold="false" />
+      <Price storeidentifier="merchantresearch" minavailable="0" maxavailable="2" multiplier="0.85" />
+      <Price storeidentifier="merchantmilitary" multiplier="1" sold="false" />
+      <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantarmory" multiplier="1" sold="false" />
+      <Price storeidentifier="merchantengineering" multiplier="0.9" minavailable="2" />
+    </Price>
+    <Fabricate suitablefabricators="fabricator" requiredtime="35">
+      <RequiredSkill identifier="mechanical" level="25" />
+      <RequiredSkill identifier="electrical" level="45" />
+      <Item identifier="rubber" amount="2" />
+      <Item identifier="orangejumpsuit1" />
+    </Fabricate>
+    <Deconstruct time="20">
+      <Item identifier="lead" />
+      <Item identifier="lead" />
+      <Item identifier="lead" />
+      <Item identifier="rubber" />
+    </Deconstruct>
+    <InventoryIcon name="heavyhazmatinv" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" sourcerect="612,0,78,61" origin="0.5,0.5" />
+    <Sprite name="heavyhazmatground" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" sourcerect="544,63,164,76" depth="0.6" origin="0.5,0.5" />
+    <Body width="180" height="50" density="30" friction="0.8" restitution="0.01" />
+    <Wearable slots="Any,InnerClothes" msg="ItemMsgPickUpSelect">
+      <sprite name="HAZMAT helm Wearable" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.77" hidewearablesoftype="hair" sourcerect="548,153,94,91" origin="0.5065703,0.5108439" />
+      <sprite name="Heavy HAZMAT Torso" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Right Hand" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Left Hand" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Right Lower Arm" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Left Lower Arm" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Right Upper Arm" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Left Upper Arm" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Waist" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Right Thigh" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Left Thigh" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Right Leg" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Left Leg" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Left Shoe" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <sprite name="Heavy HAZMAT Right Shoe" texture="%ModDir:2764968387%/Jobgear/rencbrnsuit.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,755,256" origin="0.5,0.5" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="scp_presolatexinfection" damagemultiplier="0" probabilitymultiplier="0" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="acidburn" damagemultiplier="0.35" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="burn" damagemultiplier="0.45" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,contaminated,overheating" damagemultiplier="0.6" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,gunshotwound" damagemultiplier="0.9" />
+      <SkillModifier skillidentifier="electrical" skillvalue="-5" />
+      <SkillModifier skillidentifier="weapons" skillvalue="-10" />
+      <SkillModifier skillidentifier="mechanical" skillvalue="-5" />
+      <StatValue stattype="WalkingSpeed" value="-0.15" />
+      <StatValue stattype="SwimmingSpeed" value="-0.1" />
+      <StatusEffect type="OnWearing" target="Character" tags="cbrnsuit" disabledeltatime="true" comparison="and" duration="1" interval="1">
+        <Conditional HasStatusTag="sealed" />
+      </StatusEffect>
+    </Wearable>
+  </Item>
+  </Override>
+  <Override>
+  <Item name="" identifier="scp_cbrnsuit" description="" category="Equipment" subcategory="Coalition" cargocontaineridentifier="metalcrate" tags="smallitem,clothing" scale="0.5" impactsoundtag="impact_soft">
+    <PreferredContainer primary="armcab" />
+    <Price baseprice="600" displaynonempty="true" minleveldifficulty="15">
+      <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
+      <Price storeidentifier="merchantcity" multiplier="1.25" sold="false" />
+      <Price storeidentifier="merchantresearch" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" multiplier="1" minavailable="0" maxavailable="2" />
+      <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantarmory" multiplier="1" minavailable="0" maxavailable="2" />
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="ballisticfiber" />
+      <Item identifier="lead" />
+      <Item identifier="rubber" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="35">
+      <RequiredSkill identifier="weapons" level="40" />
+      <RequiredItem identifier="scp_lightuniform" />
+      <RequiredItem identifier="rubber" amount="4" />
+      <RequiredItem identifier="lead" amount="2" />
+    </Fabricate>
+    <InventoryIcon name="cbrnsuitinv" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" sourcerect="619,-3,69,63" origin="0.5,0.5" />
+    <Sprite name="cbrnsuitground" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" sourcerect="544,65,162,73" depth="0.6" origin="0.5,0.5" />
+    <Body width="180" height="50" density="30" friction="0.8" restitution="0.01" />
+    <Wearable slots="Any,InnerClothes" msg="ItemMsgPickUpSelect">
+      <sprite name="CBRN helmet" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.72" hidewearablesoftype="hair" sourcerect="560,164,94,91" origin="0.5,0.51" />
+      <sprite name="CBRN Torso" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="CBRN Uniform Right Hand" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="CBRN Uniform Left Hand" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="CBRN Uniform Right Lower Arm" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Lower Arm" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Right Upper Arm" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Upper Arm" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Waist" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Right Thigh" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Thigh" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Right Leg" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Leg" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Shoe" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Right Shoe" texture="%ModDir:2764968387%/Jobgear/cbrnsuit.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="scp_presolatexinfection" damagemultiplier="0" probabilitymultiplier="0" />
+      <damagemodifier afflictionidentifiers="acidburn" armorsector="0.0,360.0" damagemultiplier="0.1" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictionidentifiers="burn" armorsector="0.0,360.0" damagemultiplier="0.4" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictionidentifiers="radiationsickness,contaminated,overheating" armorsector="0.0,360.0" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictiontypes="alieninfection" armorsector="0.0,360.0" damagemultiplier="0.75" probabilitymultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound" armorsector="0.0,360.0" damagemultiplier="0.85" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictionidentifiers="bleeding" armorsector="0.0,360.0" damagemultiplier="0.9" damagesound="LimbArmor" deflectprojectiles="true" />
+      <SkillModifier skillidentifier="weapons" skillvalue="-5" />
+      <SkillModifier skillidentifier="mechanical" skillvalue="-10" />
+      <SkillModifier skillidentifier="electrical" skillvalue="-10" />
+      <StatValue stattype="WalkingSpeed" value="-0.1" />
+      <StatValue stattype="SwimmingSpeed" value="-0.1" />
+      <StatusEffect type="OnWearing" target="Character" tags="cbrnsuit" disabledeltatime="true" comparison="and" duration="1" interval="1">
+        <Conditional HasStatusTag="sealed" />
+      </StatusEffect>
+    </Wearable>
+  </Item>
+  </Override>
+  <Override>
+  <Item name="" identifier="scp_sevasuit" description="" category="Equipment" cargocontaineridentifier="metalcrate" tags="smallitem,clothing" scale="0.5" impactsoundtag="impact_soft">
+    <PreferredContainer primary="armcab" />
+    <Price baseprice="1200" displaynonempty="true" sold="false" />
+    <Deconstruct time="10">
+      <Item identifier="ballisticfiber" />
+      <Item identifier="titaniumaluminiumalloy" />
+      <Item identifier="rubber" />
+    </Deconstruct>
+    <InventoryIcon name="cbrnsuitinv" texture="%ModDir:2764968387%/Jobgear/apsseva.png" sourcerect="667,0,98,81" origin="0.5,0.5" />
+    <Sprite name="cbrnsuitground" texture="%ModDir:2764968387%/Jobgear/apsseva.png" sourcerect="496,0,121,83" depth="0.6" origin="0.5,0.5" />
+    <Body width="180" height="50" density="30" friction="0.8" restitution="0.01" />
+    <Wearable slots="Any,InnerClothes+Head" msg="ItemMsgPickUpSelect">
+      <sprite name="CBRN helmet" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.67" hidewearablesoftype="hair" sourcerect="659,136,94,91" origin="0.5,0.51" />
+      <sprite name="CBRN Torso" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="CBRN Uniform Right Hand" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="CBRN Uniform Left Hand" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="CBRN Uniform Right Lower Arm" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Lower Arm" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Right Upper Arm" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Upper Arm" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Waist" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Right Thigh" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Thigh" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Right Leg" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Leg" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Left Shoe" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <sprite name="Heavy Uniform Right Shoe" texture="%ModDir:2764968387%/Jobgear/apsseva.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" sourcerect="0,0,683,264" origin="0.5,0.5" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="scp_presolatexinfection" damagemultiplier="0" probabilitymultiplier="0" />
+      <damagemodifier afflictionidentifiers="acidburn,burn" armorsector="0.0,360.0" damagemultiplier="0.1" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictionidentifiers="radiationsickness" armorsector="0.0,360.0" damagemultiplier="0.4" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictiontypes="alieninfection" armorsector="0.0,360.0" damagemultiplier="0.75" probabilitymultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictionidentifiers="blunttrauma,lacerations,gunshotwound" armorsector="0.0,360.0" damagemultiplier="0.55" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier afflictionidentifiers="bleeding" armorsector="0.0,360.0" damagemultiplier="0.65" damagesound="LimbArmor" deflectprojectiles="true" />
+      <StatusEffect tags="sealed" type="OnWearing" target="Character" duration="1" stackable="false" setvalue="true" />
+      <StatusEffect tags="cbrnsuit" type="OnWearing" target="Character" duration="1" stackable="false" setvalue="true" />
+      <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" UseHullOxygen="false" />
+      <StatusEffect type="OnWearing" target="Character" ObstructVisionAmount="0.2" ObstructVision="true" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true" />
+    </Wearable>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="tank">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+      <Containable items="oxygensource,weldingtoolfuel" excludeditems="oxygenitetank" />
+      <Containable items="oxygensource">
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" />
+        <StatusEffect type="OnWearing" target="Contained" Condition="-0.7" comparison="And">
+          <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Contained">
+          <Conditional condition="lt 5.0" />
+          <Sound file="Content/Items/WarningBeepSlow.ogg" frequencymultiplier="1.2" range="250" loop="true" />
+        </StatusEffect>
+      </Containable>
+      <Containable items="oxygenitetank">
+        <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="1.2" setvalue="true" targetslot="0" comparison="And">
+          <Conditional IsDead="false" />
+          <Conditional DecreasedOxygenConsumption="lt 99" />
+          <Conditional NeedsAir="true" />
+        </StatusEffect>
+      </Containable>
+      <Containable items="weldingfueltank" blameequipperfordeath="true">
+        <StatusEffect type="OnWearing" target="Contained" Condition="-0.7" comparison="And">
+          <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" Oxygen="-7.0" comparison="And">
+          <Conditional IsDead="false" />
+          <Conditional DecreasedOxygenConsumption="lt 99" />
+          <Conditional NeedsAir="true" />
+        </StatusEffect>
+      </Containable>
+      <Containable items="incendiumfueltank" blameequipperfordeath="true">
+        <StatusEffect type="OnWearing" target="Contained" Condition="-0.7" comparison="And">
+          <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+          <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" comparison="And" targetlimb="Torso">
+          <Affliction identifier="burn" amount="20.0" />
+          <Conditional IsDead="false" />
+          <Conditional DecreasedOxygenConsumption="lt 99" />
+          <Conditional NeedsAir="true" />
+        </StatusEffect>
+      </Containable>
+      <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+        <RequiredItem items="oxygensource" type="Contained" matchonempty="true" />
+        <Conditional condition="lte 0.0" />
+        <Sound file="Content/Items/WarningBeep.ogg" frequencymultiplier="1.2" range="250" loop="true" />
+      </StatusEffect>
+    </ItemContainer>
+  </Item>
   </Override>
 </Items>

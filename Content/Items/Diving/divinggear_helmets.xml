@@ -3,21 +3,17 @@
   <!-- Renegade Helmet -->
   <Override>
     <Item name="Diving Helmet (Renegade)" identifier="earenegadedivingsuithelmet" variantof="divingsuithelmetpreset" category="Diving" subcategory="Renegade" scale="0.32" hideinmenus="false">
-      <Price baseprice="150">
-        <Price storeidentifier="merchantoutpost" multiplier="0.9" minavailable="2" />
-        <Price storeidentifier="merchantcity" multiplier="0.85" minavailable="4" />
-        <Price storeidentifier="merchantresearch" minavailable="3" />
-        <Price storeidentifier="merchantmilitary" minavailable="3" />
-        <Price storeidentifier="merchantmine" multiplier="1.25" minavailable="5" />
-      </Price>
+      <Price baseprice="250" soldeverywhere="false"></Price>
       <PreferredContainer primary="divingsuitcontainer" secondary="divingcab" />
       <PreferredContainer primary="wreckedcrewcab,abandonedcrewcab" spawnprobability="0.2" />
-      <Deconstruct time="10" />
+    <Deconstruct time="15">
+      <Item identifier="steel" />
+    </Deconstruct>
       <Fabricate suitablefabricators="fabricator" requiredtime="15">
-        <RequiredSkill identifier="mechanical" level="40" />
+        <RequiredSkill identifier="mechanical" level="50" />
         <RequiredItem identifier="divingsuithelmet" />
         <RequiredItem identifier="ballisticfiber" />
-        <RequiredItem identifier="steel" />
+		<RequiredItem identifier="steel" amount="2" />
         <RequiredItem identifier="plastic" />
       </Fabricate>
       <Sprite name="Diving Suit Item" texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="-3,204,103,103" depth="0.55" origin="0.5,0.5" />
@@ -35,35 +31,44 @@
             <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
           </LightComponent>
         </sprite>
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,bitewounds,lacerations" damagemultiplier="0.75" damagesound="armourmedimpact" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="gunshotwound" damagemultiplier="0.6" damagesound="armourmedimpact" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="bleeding" damagemultiplier="0.5" damagesound="" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.7" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.7" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,burn" damagemultiplier="0.7" damagesound="armourmedimpact" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="armourmedimpact" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,bleeding" damagemultiplier="0.75" damagesound="armourmedimpact" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="gunshotwound" damagemultiplier="0.6" damagesound="armourmedimpact" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="explosiondamage" damagemultiplier="0.9" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="bitewounds,lacerations" damagemultiplier="0.85" damagesound="" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,burn,contaminated,overheating" damagemultiplier="0.8" damagesound="armourmedimpact" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="armourmedimpact" />
       </Wearable>
     </Item>
   </Override>
   <!-- Combat Helmet -->
   <Override>
     <Item name="Diving Helmet (Coalition Combat)" identifier="eacombatdivingsuithelmet" variantof="divingsuithelmetpreset" category="Diving" subcategory="Coalition" scale="0.32" hideinmenus="false">
-      <Price baseprice="150">
-        <Price storeidentifier="merchantoutpost" multiplier="0.9" minavailable="2" />
-        <Price storeidentifier="merchantcity" multiplier="0.85" minavailable="4" />
-        <Price storeidentifier="merchantresearch" minavailable="3" />
-        <Price storeidentifier="merchantmilitary" minavailable="3" />
-        <Price storeidentifier="merchantmine" multiplier="1.25" minavailable="5" />
+    <Price baseprice="2000" displaynonempty="true" minleveldifficulty="35">
+      <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
+      <Price storeidentifier="merchantcity" multiplier="1.25" sold="false" />
+      <Price storeidentifier="merchantresearch" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" multiplier="0.95" minavailable="0" maxavailable="1">
+        <Reputation faction="coalition" min="100" />
       </Price>
+      <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantarmory" multiplier="0.95" minavailable="0" maxavailable="1">
+        <Reputation faction="coalition" min="100" />
+      </Price>
+    </Price>
       <PreferredContainer primary="divingsuitcontainer" secondary="divingcab" />
       <PreferredContainer primary="wreckedcrewcab,abandonedcrewcab" spawnprobability="0.2" />
-      <Deconstruct time="10" />
-      <Fabricate suitablefabricators="fabricator" requiredtime="15">
-        <RequiredSkill identifier="mechanical" level="40" />
-        <RequiredItem identifier="abyssdivingsuithelmet" />
-        <RequiredItem identifier="titaniumaluminiumalloy" />
-        <RequiredItem identifier="scp_durasteel" />
-        <RequiredItem identifier="rubber" amount="2" />
+    <Deconstruct time="15">
+      <Item identifier="scp_durasteel" amount="1" />
+      <Item identifier="titaniumaluminiumalloy" amount="1" />
+      <Item identifier="rubber" amount="1" />
+    </Deconstruct>
+      <Fabricate suitablefabricators="fabricator" requiredtime="30">
+        <RequiredSkill identifier="mechanical" level="65" />
+		<RequiredSkill identifier="weapons" level="75" />
+		<RequiredItem identifier="abyssdivingsuithelmet" />
+		<RequiredItem identifier="titaniumaluminiumalloy" amount="2" />
+		<RequiredItem identifier="scp_durasteel" amount="4" />
+		<RequiredItem identifier="rubber" amount="3" />
       </Fabricate>
       <Sprite name="Diving Suit Item" texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="111,203,103,103" depth="0.55" origin="0.5,0.5" />
       <InventoryIcon texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="111,203,103,103" origin="0.5,0.5" />
@@ -80,40 +85,35 @@
             <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
           </LightComponent>
         </sprite>
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,blunttrauma,burn" damagemultiplier="0.1" damagesound="armourheavyimpact" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="gunshotwound,bleeding,explosiondamage" damagemultiplier="0.2" damagesound="armourheavyimpact" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.5" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,bitewounds,stun" damagemultiplier="0.5" damagesound="armourheavyimpact" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,blunttrauma" damagemultiplier="0.1" damagesound="armourheavyimpact" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="gunshotwound,bleeding,explosiondamage,burn" damagemultiplier="0.25" damagesound="armourheavyimpact" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,bitewounds,stun,contaminated,overheating" damagemultiplier="0.5" damagesound="armourheavyimpact" />
       </Wearable>
     </Item>
   </Override>
   <!-- Interceptor Helmet -->
   <Override>
     <Item name="Diving Helmet (Interceptor)" identifier="eainterceptordivingsuithelmet" variantof="divingsuithelmetpreset" category="Diving" scale="0.32" hideinmenus="false">
-      <Price baseprice="150">
-        <Price storeidentifier="merchantoutpost" multiplier="0.9" minavailable="2" />
-        <Price storeidentifier="merchantcity" multiplier="0.85" minavailable="4" />
-        <Price storeidentifier="merchantresearch" minavailable="3" />
-        <Price storeidentifier="merchantmilitary" minavailable="3" />
-        <Price storeidentifier="merchantmine" multiplier="1.25" minavailable="5" />
-      </Price>
-      <PreferredContainer primary="divingsuitcontainer" secondary="divingcab" />
-      <PreferredContainer primary="wreckedcrewcab,abandonedcrewcab" spawnprobability="0.2" />
-      <Deconstruct time="10" />
-      <Fabricate suitablefabricators="fabricator" requiredtime="15">
-        <RequiredSkill identifier="mechanical" level="40" />
+      <Price baseprice="1250" sold="false"></Price>
+    <PreferredContainer primary="divingsuitcontainer" />
+    <PreferredContainer primary="piratedivingsuitcontainer" spawnprobability="0.01" minleveldifficulty="35" />
+    <PreferredContainer primary="wreckdivingsuitcontainer" spawnprobability="0.006" minleveldifficulty="35" />
+    <Deconstruct time="15">
+      <Item identifier="dementonite" amount="1" />
+    </Deconstruct>
+      <Fabricate suitablefabricators="fabricator" requiredtime="25">
+        <RequiredSkill identifier="mechanical" level="85" />
+		<RequiredSkill identifier="weapons" level="75" />
         <RequiredItem identifier="slipsuithelmet" />
         <RequiredItem identifier="scp_prototypeusb" mincondition="0.25" />
         <RequiredItem identifier="scp_durasteel" />
-        <RequiredItem identifier="dementonite" />
+		<RequiredItem identifier="dementonite" amount="4" />
       </Fabricate>
       <Sprite name="Diving Suit Item" texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="686,356,103,103" depth="0.55" origin="0.5,0.5" />
       <InventoryIcon texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="686,356,103,103" origin="0.5,0.5" />
       <Wearable>
         <sprite name="intercepsuit Suit Helmet Wearable" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.67" hidelimb="false" alphaclipotherwearables="true" sourcerect="686,356,103,103" origin="0.50110054,0.5257158">
           <LightComponent range="700.0" lightcolor="250,224,165,175" powerconsumption="10" IsOn="false" allowingameediting="false">
-            <Upgrade gameversion="0.1300.0.3" allowingameediting="false" />
             <StatusEffect type="OnWearing" target="This" Voltage="1.0" targetslot="0" setvalue="true">
               <RequiredItem Items="mobilebattery" type="Contained" />
             </StatusEffect>
@@ -123,11 +123,9 @@
             <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
           </LightComponent>
         </sprite>
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,gunshotwound,bitewounds,lacerations,bleeding" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,gunshotwound,bitewounds,lacerations,bleeding" damagemultiplier="0.6" damagesound="LimbArmor" deflectprojectiles="true" />
         <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.5" damagesound="" deflectprojectiles="true" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.6" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="contaminated" damagemultiplier="0.6" />
-        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.6" damagesound="LimbArmor" />
+		<damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,contaminated,overheating" damagemultiplier="0.6" damagesound="LimbArmor" />
         <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" probabilitymultiplier="0.5" damagesound="LimbArmor" />
       </Wearable>
     </Item>
