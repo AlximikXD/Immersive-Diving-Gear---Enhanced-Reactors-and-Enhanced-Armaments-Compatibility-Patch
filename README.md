@@ -5,15 +5,15 @@ Should work with
 Hazardously Enhanced Reactors.
 
 Load Order
+- Immersive Diving Gear
+- Enhanced Reactors
+- Enhanced Armaments
+- Immersive Diving Gear - Enhanced Reactors and Enhanced Armaments Compatibility Patch
+
 When using Immersive Diving Gear - Enhanced Reactors Compatibility Patch
 - Immersive Diving Gear - Enhanced Reactors Compatibility Patch
 - Enhanced Reactors
 - Immersive Diving Gear
-- Enhanced Armaments
-- Immersive Diving Gear - Enhanced Reactors and Enhanced Armaments Compatibility Patch
-
-- Immersive Diving Gear
-- Enhanced Reactors
 - Enhanced Armaments
 - Immersive Diving Gear - Enhanced Reactors and Enhanced Armaments Compatibility Patch
 
