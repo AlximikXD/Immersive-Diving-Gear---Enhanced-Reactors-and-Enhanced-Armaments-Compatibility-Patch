@@ -1,8 +1,6 @@
 Compatibility Patch
 Patches the Enhanced Armaments and Enhanced Reactors to work with the gameplay mechanics of Immersive Diving Gear.
 
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-
 Load Order:
 - Immersive Diving Gear - Enhanced Reactors and Enhanced Armaments Compatibility Patch
 - Enhanced Reactors
