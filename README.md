@@ -10,7 +10,7 @@ Load Order:
 Incompatible Mods:
 - Immersive Diving Gear - Enhanced Armaments Compatibility Patch
 - Immersive Diving Gear - Enhanced Reactors Compatibility Patch
-Any mod that changes:
+- Any mod that changes:
 Enhanced Armaments - Outlander CBRN Suit, Renegade CBRN Suit, Coalition CBRN Suit, Renegade Diving Suit, Combat Hardsuit, Interceptor Diving Suit, Liquidator Suit
 Enhanced Reactors - Hazmat Suit (Pressure Resistant)
 Vanilla - PUCS
