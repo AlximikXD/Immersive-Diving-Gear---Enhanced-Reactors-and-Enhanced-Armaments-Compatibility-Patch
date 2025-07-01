@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<infotexts language="English" nowhitespace="false" translatedname="English">
+  <!-- Items -->
+  <!-- Bots Diving Helmets -->
+  <entityname.botpucsdivingsuithelmet>Bot Diving Helmet (PUCS)</entityname.botpucsdivingsuithelmet>
+  <entityname.bothazmatdivingsuithelmet>Bot Diving Helmet (Hazmat)</entityname.bothazmatdivingsuithelmet>
+  <entityname.botrenegadedivingsuithelmet>Bot Diving Helmet (Renegade)</entityname.botrenegadedivingsuithelmet>
+  <entityname.botcombathardsuithelmet>Bot Diving Helmet (Combat Hardsuit)</entityname.botcombathardsuithelmet>
+  <entityname.botinterceptordivingsuithelmet>Bot Diving Helmet (Interceptor)</entityname.botinterceptordivingsuithelmet>
+  <entityname.botliquidatordivingsuithelmet>Bot Diving Helmet (Liquidator)</entityname.botliquidatordivingsuithelmet>
+  <!-- Diving Helmets -->
+  <entityname.pucsdivingsuithelmet>Diving Helmet (PUCS)</entityname.pucsdivingsuithelmet>
+  <entityname.hazmatdivingsuithelmet>Diving Helmet (Hazmat)</entityname.hazmatdivingsuithelmet>
+  <entityname.renegadedivingsuithelmet>Diving Helmet (Renegade)</entityname.renegadedivingsuithelmet>
+  <entityname.combathardsuithelmet>Diving Helmet (Combat Hardsuit)</entityname.combathardsuithelmet>
+  <entityname.interceptordivingsuithelmet>Diving Helmet (Interceptor)</entityname.interceptordivingsuithelmet>
+  <entityname.liquidatorsuithelmet>Diving Helmet (Liquidator)</entityname.liquidatorsuithelmet>
+</infotexts>

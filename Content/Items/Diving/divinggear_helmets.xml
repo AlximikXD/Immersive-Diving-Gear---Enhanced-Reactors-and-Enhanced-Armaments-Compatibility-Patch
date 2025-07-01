@@ -1,8 +1,824 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Items>
-  <!-- Renegade Helmet -->
   <Override>
-    <Item name="Diving Helmet (Renegade)" identifier="earenegadedivingsuithelmet" variantof="divingsuithelmetpreset" category="Diving" subcategory="Renegade" scale="0.32" hideinmenus="false">
+    <!-- Bot Diving Helmet (PUCS) -->
+    <Item name="" identifier="botpucsdivingsuithelmet" tags="bothelmet" scale="0.3" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_light" botpriority="1" hideinmenus="true">
+      <Sprite name="Bot PUCS Diving Helmet Item" texture="Content/Items/Jobgear/headgears.png" sourcerect="127,520,105,124" depth="0.55" origin="0.5,0.5" />
+      <InventoryIcon texture="Content/Items/Jobgear/headgears.png" sourcerect="127,520,105,124" depth="0.55" origin="0.5,0.5" />
+      <ItemComponent canbeselected="false" allowingameediting="false">
+        <!-- apply low pass filter when worn -->
+        <StatusEffect type="OnWearing" target="Character" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true" />
+        <!-- obstruct vision -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" setvalue="true" disabledeltatime="true" />
+        <!-- play air breathing sound when not in water -->
+        <StatusEffect type="OnWearing" target="Character" comparison="And">
+          <Conditional InWater="false" />
+          <Conditional IsDead="false" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" volume="1.5" loop="true" />
+        </StatusEffect>
+        <!-- play underwater breathing sound and create bubbles when in water -->
+        <StatusEffect type="OnWearing" target="limb" targetlimb="head" interval="6" duration="0.5" comparison="And">
+          <Conditional InWater="true" />
+          <Conditional IsDead="false" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater1.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater2.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater3.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater4.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <ParticleEmitter particle="risingbubbles" velocitymin="10.0" velocitymax="10.0" scalemin="0.6" scalemax="0.6" particlespersecond="20" />
+        </StatusEffect>
+      </ItemComponent>
+      <!-- GreaterComponent used to toggle between releasing or building up pressure by changing and checking for the timeframe value (1 = closed valve, 0 = open valve) -->
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0">
+        <!-- tag the character and helmet with "sealed" when wearing the suit, the pressure valve is closed and the character has the "hashelmet" and "hasseal" tags -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="sealed" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional HasStatusTag="eq hassuit" />
+          <Conditional HasStatusTag="eq hasseal" />
+        </StatusEffect>
+        <!-- release pressure visually -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="releasepressure" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional vitaltiy="gt 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot | NT compatibility -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional sym_unconsciousness="lte 0" />
+        </StatusEffect>
+        <!-- open the pressure valve if the wearer has the affliction "openvalve" while the pressure valve is closed -->
+        <StatusEffect type="OnWearing" target="This" timeframe="0" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional openvalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+        <!-- close the pressure valve if the wearer has the affliction "closevalve" while the pressure valve is open -->
+        <StatusEffect type="OnWearing" target="This" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional closevalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+      </GreaterComponent>
+      <!-- Helmet Light Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="200,-100" anchor="BottomCenter" relativesize="0.1,0.08" />
+        <TickBox text="interaction.togglesuitlight">
+          <StatusEffect type="OnUse" target="This" targetitemcomponent="LightComponent" IsOn="true" setvalue="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" targetitemcomponent="LightComponent" IsOn="false" setvalue="true" />
+        </TickBox>
+      </CustomInterface>
+      <!-- Pressure Valve Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="-50,-100" anchor="BottomCenter" relativesize="0.14,0.12" />
+        <Button text="interaction.openpressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true">
+            <Conditional timeframe="eq 1" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+        <Button text="interaction.closepressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true">
+            <Conditional timeframe="eq 0" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+        <sprite name="Diving Suit Helmet Wearable" texture="Content/Items/Jobgear/headgears.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="false" alphaclipotherwearables="true" sourcerect="127,520,105,124" origin="0.5,0.5">
+          <LightComponent range="700.0" lightcolor="250,224,165,175" powerconsumption="10" IsOn="false" allowingameediting="false">
+            <Upgrade gameversion="0.1300.0.3" allowingameediting="false" />
+            <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <!-- tag the character with "bothelmet" and "hashelmet" | this prevents the player from dying when switching to a bot in water -->
+        <StatusEffect type="OnWearing" target="Character" tags="hashelmet,bothelmet" setvalue="true" duration="0.1" />
+        <!-- remove the item when it's not contained -->
+        <StatusEffect type="OnNotContained" target="This">
+          <Remove />
+        </StatusEffect>
+        <!-- drop the helmet when the wearer is not a bot, not in water and isn't pressurized -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="false" targetcontainer="true" />
+          <Conditional InWater="false" targetcontainer="true" />
+          <Conditional HasStatusTag="neq pressurized" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+        <!-- drop the helmet if the bot unequips the suit -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="true" targetcontainer="true" />
+          <Conditional HasStatusTag="neq botsuit" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+      </Wearable>
+      <!-- HELMET INVENTORY | spawns with battery and seal for this specific helmet and is locked -->
+      <ItemContainer capacity="0" hideitems="true" spawnwithid="batterycell,suitseal" containedstateindicatorslot="1" allowaccess="false" locked="true">
+        <SlotIcon slotindex="1" texture="%ModDir:3074045632%/Content/Items/Diving/SuitSealIcon.png" sourcerect="0,0,60,55" origin="0.5,0.5" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="mobilebattery" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="seal">
+            <StatusEffect type="OnContaining" target="This,Character" tags="hasseal" setvalue="true" duration="0.1">
+              <RequiredItem items="seal" type="Contained" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+    <!-- Bot Diving Helmet (Hazmat) -->
+    <Item name="" identifier="bothazmatdivingsuithelmet" tags="bothelmet" scale="0.3" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_light" botpriority="1" hideinmenus="true">
+      <InventoryIcon texture="%ModDir:3045796581%/Content/Items/Jobgear/Engineer/HazmatSuit.png" sourcerect="414,160,98,96" origin="0.5,0.5" />
+      <Sprite name="Diving Suit Item" texture="%ModDir:3045796581%/Content/Items/Jobgear/Engineer/HazmatSuit.png" sourcerect="414,160,98,96" depth="0.55" origin="0.5,0.5" />
+      <ItemComponent canbeselected="false" allowingameediting="false">
+        <!-- apply low pass filter when worn -->
+        <StatusEffect type="OnWearing" target="Character" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true" />
+        <!-- obstruct vision -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" setvalue="true" disabledeltatime="true" />
+        <!-- play air breathing sound when not in water -->
+        <StatusEffect type="OnWearing" target="Character" comparison="And">
+          <Conditional InWater="false" />
+          <Conditional IsDead="false" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" volume="1.5" loop="true" />
+        </StatusEffect>
+        <!-- play underwater breathing sound and create bubbles when in water -->
+        <StatusEffect type="OnWearing" target="limb" targetlimb="head" interval="6" duration="0.5" comparison="And">
+          <Conditional InWater="true" />
+          <Conditional IsDead="false" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater1.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater2.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater3.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater4.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <ParticleEmitter particle="risingbubbles" velocitymin="10.0" velocitymax="10.0" scalemin="0.6" scalemax="0.6" particlespersecond="20" />
+        </StatusEffect>
+      </ItemComponent>
+      <!-- GreaterComponent used to toggle between releasing or building up pressure by changing and checking for the timeframe value (1 = closed valve, 0 = open valve) -->
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0">
+        <!-- tag the character and helmet with "sealed" when wearing the suit, the pressure valve is closed and the character has the "hashelmet" and "hasseal" tags -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="sealed" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional HasStatusTag="eq hassuit" />
+          <Conditional HasStatusTag="eq hasseal" />
+        </StatusEffect>
+        <!-- release pressure visually -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="releasepressure" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional vitaltiy="gt 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot | NT compatibility -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional sym_unconsciousness="lte 0" />
+        </StatusEffect>
+        <!-- open the pressure valve if the wearer has the affliction "openvalve" while the pressure valve is closed -->
+        <StatusEffect type="OnWearing" target="This" timeframe="0" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional openvalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+        <!-- close the pressure valve if the wearer has the affliction "closevalve" while the pressure valve is open -->
+        <StatusEffect type="OnWearing" target="This" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional closevalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+      </GreaterComponent>
+      <!-- Helmet Light Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="200,-100" anchor="BottomCenter" relativesize="0.1,0.08" />
+        <TickBox text="interaction.togglesuitlight">
+          <StatusEffect type="OnUse" target="This" targetitemcomponent="LightComponent" IsOn="true" setvalue="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" targetitemcomponent="LightComponent" IsOn="false" setvalue="true" />
+        </TickBox>
+      </CustomInterface>
+      <!-- Pressure Valve Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="-50,-100" anchor="BottomCenter" relativesize="0.14,0.12" />
+        <Button text="interaction.openpressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true">
+            <Conditional timeframe="eq 1" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+        <Button text="interaction.closepressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true">
+            <Conditional timeframe="eq 0" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+        <sprite name="Engineer's Hazmat Head" texture="%ModDir:3045796581%/Content/Items/Jobgear/Engineer/HazmatSuit.png" limb="Head" hidelimb="true" hidewearablesoftype="moustache,beard,hair" hideotherwearables="true" inheritlimbdepth="true" sourcerect="414,160,98,96" scale="0.3" origin="0.55,0.6">
+          <LightComponent range="700.0" lightcolor="250,224,165,175" powerconsumption="10" IsOn="false" allowingameediting="false">
+            <Upgrade gameversion="0.1300.0.3" allowingameediting="false" />
+            <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <!-- tag the character with "bothelmet" and "hashelmet" | this prevents the player from dying when switching to a bot in water -->
+        <StatusEffect type="OnWearing" target="Character" tags="hashelmet,bothelmet" setvalue="true" duration="0.1" />
+        <!-- remove the item when it's not contained -->
+        <StatusEffect type="OnNotContained" target="This">
+          <Remove />
+        </StatusEffect>
+        <!-- drop the helmet when the wearer is not a bot, not in water and isn't pressurized -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="false" targetcontainer="true" />
+          <Conditional InWater="false" targetcontainer="true" />
+          <Conditional HasStatusTag="neq pressurized" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+        <!-- drop the helmet if the bot unequips the suit -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="true" targetcontainer="true" />
+          <Conditional HasStatusTag="neq botsuit" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+      </Wearable>
+      <!-- HELMET INVENTORY | spawns with battery and seal for this specific helmet and is locked -->
+      <ItemContainer capacity="0" hideitems="true" spawnwithid="batterycell,suitseal" containedstateindicatorslot="1" allowaccess="false" locked="true">
+        <SlotIcon slotindex="1" texture="%ModDir:3074045632%/Content/Items/Diving/SuitSealIcon.png" sourcerect="0,0,60,55" origin="0.5,0.5" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="mobilebattery" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="seal">
+            <StatusEffect type="OnContaining" target="This,Character" tags="hasseal" setvalue="true" duration="0.1">
+              <RequiredItem items="seal" type="Contained" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+    <!-- Bot Diving Helmet (Renegade) -->
+    <Item name="" identifier="botrenegadedivingsuithelmet" tags="bothelmet" scale="0.3" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_light" botpriority="1" hideinmenus="true">
+      <InventoryIcon texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="-3,204,103,103" origin="0.5,0.5" />
+	  <Sprite name="Diving Suit Item" texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="-3,204,103,103" depth="0.55" origin="0.5,0.5" />
+      <ItemComponent canbeselected="false" allowingameediting="false">
+        <!-- apply low pass filter when worn -->
+        <StatusEffect type="OnWearing" target="Character" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true" />
+        <!-- obstruct vision -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" setvalue="true" disabledeltatime="true" />
+        <!-- play air breathing sound when not in water -->
+        <StatusEffect type="OnWearing" target="Character" comparison="And">
+          <Conditional InWater="false" />
+          <Conditional IsDead="false" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" volume="1.5" loop="true" />
+        </StatusEffect>
+        <!-- play underwater breathing sound and create bubbles when in water -->
+        <StatusEffect type="OnWearing" target="limb" targetlimb="head" interval="6" duration="0.5" comparison="And">
+          <Conditional InWater="true" />
+          <Conditional IsDead="false" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater1.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater2.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater3.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater4.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <ParticleEmitter particle="risingbubbles" velocitymin="10.0" velocitymax="10.0" scalemin="0.6" scalemax="0.6" particlespersecond="20" />
+        </StatusEffect>
+      </ItemComponent>
+      <!-- GreaterComponent used to toggle between releasing or building up pressure by changing and checking for the timeframe value (1 = closed valve, 0 = open valve) -->
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0">
+        <!-- tag the character and helmet with "sealed" when wearing the suit, the pressure valve is closed and the character has the "hashelmet" and "hasseal" tags -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="sealed" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional HasStatusTag="eq hassuit" />
+          <Conditional HasStatusTag="eq hasseal" />
+        </StatusEffect>
+        <!-- release pressure visually -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="releasepressure" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional vitaltiy="gt 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot | NT compatibility -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional sym_unconsciousness="lte 0" />
+        </StatusEffect>
+        <!-- open the pressure valve if the wearer has the affliction "openvalve" while the pressure valve is closed -->
+        <StatusEffect type="OnWearing" target="This" timeframe="0" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional openvalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+        <!-- close the pressure valve if the wearer has the affliction "closevalve" while the pressure valve is open -->
+        <StatusEffect type="OnWearing" target="This" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional closevalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+      </GreaterComponent>
+      <!-- Helmet Light Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="200,-100" anchor="BottomCenter" relativesize="0.1,0.08" />
+        <TickBox text="interaction.togglesuitlight">
+          <StatusEffect type="OnUse" target="This" targetitemcomponent="LightComponent" IsOn="true" setvalue="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" targetitemcomponent="LightComponent" IsOn="false" setvalue="true" />
+        </TickBox>
+      </CustomInterface>
+      <!-- Pressure Valve Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="-50,-100" anchor="BottomCenter" relativesize="0.14,0.12" />
+        <Button text="interaction.openpressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true">
+            <Conditional timeframe="eq 1" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+        <Button text="interaction.closepressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true">
+            <Conditional timeframe="eq 0" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+        <sprite name="Renegade Diving Suit Helmet Wearable" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="true" hideotherwearables="true" sourcerect="-3,204,103,103" origin="0.5,0.5">
+          <LightComponent range="700.0" lightcolor="250,224,165,175" powerconsumption="10" IsOn="false" allowingameediting="false">
+            <Upgrade gameversion="0.1300.0.3" allowingameediting="false" />
+            <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <!-- tag the character with "bothelmet" and "hashelmet" | this prevents the player from dying when switching to a bot in water -->
+        <StatusEffect type="OnWearing" target="Character" tags="hashelmet,bothelmet" setvalue="true" duration="0.1" />
+        <!-- remove the item when it's not contained -->
+        <StatusEffect type="OnNotContained" target="This">
+          <Remove />
+        </StatusEffect>
+        <!-- drop the helmet when the wearer is not a bot, not in water and isn't pressurized -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="false" targetcontainer="true" />
+          <Conditional InWater="false" targetcontainer="true" />
+          <Conditional HasStatusTag="neq pressurized" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+        <!-- drop the helmet if the bot unequips the suit -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="true" targetcontainer="true" />
+          <Conditional HasStatusTag="neq botsuit" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+      </Wearable>
+      <!-- HELMET INVENTORY | spawns with battery and seal for this specific helmet and is locked -->
+      <ItemContainer capacity="0" hideitems="true" spawnwithid="batterycell,suitseal" containedstateindicatorslot="1" allowaccess="false" locked="true">
+        <SlotIcon slotindex="1" texture="%ModDir:3074045632%/Content/Items/Diving/SuitSealIcon.png" sourcerect="0,0,60,55" origin="0.5,0.5" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="mobilebattery" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="seal">
+            <StatusEffect type="OnContaining" target="This,Character" tags="hasseal" setvalue="true" duration="0.1">
+              <RequiredItem items="seal" type="Contained" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+    <!-- Bot Diving Helmet (Combat Hardsuit) -->
+    <Item name="" identifier="botcombathardsuithelmet" tags="bothelmet" scale="0.3" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_light" botpriority="1" hideinmenus="true">
+      <Sprite name="Diving Suit Item" texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="111,203,103,103" depth="0.55" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="111,203,103,103" origin="0.5,0.5" />
+      <ItemComponent canbeselected="false" allowingameediting="false">
+        <!-- apply low pass filter when worn -->
+        <StatusEffect type="OnWearing" target="Character" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true" />
+        <!-- obstruct vision -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" setvalue="true" disabledeltatime="true" />
+        <!-- play air breathing sound when not in water -->
+        <StatusEffect type="OnWearing" target="Character" comparison="And">
+          <Conditional InWater="false" />
+          <Conditional IsDead="false" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" volume="1.5" loop="true" />
+        </StatusEffect>
+        <!-- play underwater breathing sound and create bubbles when in water -->
+        <StatusEffect type="OnWearing" target="limb" targetlimb="head" interval="6" duration="0.5" comparison="And">
+          <Conditional InWater="true" />
+          <Conditional IsDead="false" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater1.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater2.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater3.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater4.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <ParticleEmitter particle="risingbubbles" velocitymin="10.0" velocitymax="10.0" scalemin="0.6" scalemax="0.6" particlespersecond="20" />
+        </StatusEffect>
+      </ItemComponent>
+      <!-- GreaterComponent used to toggle between releasing or building up pressure by changing and checking for the timeframe value (1 = closed valve, 0 = open valve) -->
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0">
+        <!-- tag the character and helmet with "sealed" when wearing the suit, the pressure valve is closed and the character has the "hashelmet" and "hasseal" tags -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="sealed" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional HasStatusTag="eq hassuit" />
+          <Conditional HasStatusTag="eq hasseal" />
+        </StatusEffect>
+        <!-- release pressure visually -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="releasepressure" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional vitaltiy="gt 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot | NT compatibility -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional sym_unconsciousness="lte 0" />
+        </StatusEffect>
+        <!-- open the pressure valve if the wearer has the affliction "openvalve" while the pressure valve is closed -->
+        <StatusEffect type="OnWearing" target="This" timeframe="0" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional openvalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+        <!-- close the pressure valve if the wearer has the affliction "closevalve" while the pressure valve is open -->
+        <StatusEffect type="OnWearing" target="This" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional closevalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+      </GreaterComponent>
+      <!-- Helmet Light Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="200,-100" anchor="BottomCenter" relativesize="0.1,0.08" />
+        <TickBox text="interaction.togglesuitlight">
+          <StatusEffect type="OnUse" target="This" targetitemcomponent="LightComponent" IsOn="true" setvalue="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" targetitemcomponent="LightComponent" IsOn="false" setvalue="true" />
+        </TickBox>
+      </CustomInterface>
+      <!-- Pressure Valve Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="-50,-100" anchor="BottomCenter" relativesize="0.14,0.12" />
+        <Button text="interaction.openpressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true">
+            <Conditional timeframe="eq 1" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+        <Button text="interaction.closepressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true">
+            <Conditional timeframe="eq 0" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+        <sprite name="combathardsuithelmet" texture="%ModDir:2764968387%/jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="true" hideotherwearables="true" sourcerect="111,203,103,103" origin="0.5,0.5">
+          <LightComponent range="700.0" lightcolor="250,224,165,175" powerconsumption="10" IsOn="false" allowingameediting="false">
+            <Upgrade gameversion="0.1300.0.3" allowingameediting="false" />
+            <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <!-- tag the character with "bothelmet" and "hashelmet" | this prevents the player from dying when switching to a bot in water -->
+        <StatusEffect type="OnWearing" target="Character" tags="hashelmet,bothelmet" setvalue="true" duration="0.1" />
+        <!-- remove the item when it's not contained -->
+        <StatusEffect type="OnNotContained" target="This">
+          <Remove />
+        </StatusEffect>
+        <!-- drop the helmet when the wearer is not a bot, not in water and isn't pressurized -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="false" targetcontainer="true" />
+          <Conditional InWater="false" targetcontainer="true" />
+          <Conditional HasStatusTag="neq pressurized" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+        <!-- drop the helmet if the bot unequips the suit -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="true" targetcontainer="true" />
+          <Conditional HasStatusTag="neq botsuit" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+      </Wearable>
+      <!-- HELMET INVENTORY | spawns with battery and seal for this specific helmet and is locked -->
+      <ItemContainer capacity="0" hideitems="true" spawnwithid="batterycell,suitseal" containedstateindicatorslot="1" allowaccess="false" locked="true">
+        <SlotIcon slotindex="1" texture="%ModDir:3074045632%/Content/Items/Diving/SuitSealIcon.png" sourcerect="0,0,60,55" origin="0.5,0.5" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="mobilebattery" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="seal">
+            <StatusEffect type="OnContaining" target="This,Character" tags="hasseal" setvalue="true" duration="0.1">
+              <RequiredItem items="seal" type="Contained" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+    <!-- Bot Diving Helmet (Interceptor) -->
+    <Item name="" identifier="botinterceptordivingsuithelmet" tags="bothelmet" scale="0.3" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_light" botpriority="1" hideinmenus="true">
+      <Sprite name="Diving Suit Item" texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="686,356,103,103" depth="0.55" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="686,356,103,103" origin="0.5,0.5" />
+      <ItemComponent canbeselected="false" allowingameediting="false">
+        <!-- apply low pass filter when worn -->
+        <StatusEffect type="OnWearing" target="Character" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true" />
+        <!-- obstruct vision -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" setvalue="true" disabledeltatime="true" />
+        <!-- play air breathing sound when not in water -->
+        <StatusEffect type="OnWearing" target="Character" comparison="And">
+          <Conditional InWater="false" />
+          <Conditional IsDead="false" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" volume="1.5" loop="true" />
+        </StatusEffect>
+        <!-- play underwater breathing sound and create bubbles when in water -->
+        <StatusEffect type="OnWearing" target="limb" targetlimb="head" interval="6" duration="0.5" comparison="And">
+          <Conditional InWater="true" />
+          <Conditional IsDead="false" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater1.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater2.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater3.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater4.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <ParticleEmitter particle="risingbubbles" velocitymin="10.0" velocitymax="10.0" scalemin="0.6" scalemax="0.6" particlespersecond="20" />
+        </StatusEffect>
+      </ItemComponent>
+      <!-- GreaterComponent used to toggle between releasing or building up pressure by changing and checking for the timeframe value (1 = closed valve, 0 = open valve) -->
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0">
+        <!-- tag the character and helmet with "sealed" when wearing the suit, the pressure valve is closed and the character has the "hashelmet" and "hasseal" tags -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="sealed" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional HasStatusTag="eq hassuit" />
+          <Conditional HasStatusTag="eq hasseal" />
+        </StatusEffect>
+        <!-- release pressure visually -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="releasepressure" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional vitaltiy="gt 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot | NT compatibility -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional sym_unconsciousness="lte 0" />
+        </StatusEffect>
+        <!-- open the pressure valve if the wearer has the affliction "openvalve" while the pressure valve is closed -->
+        <StatusEffect type="OnWearing" target="This" timeframe="0" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional openvalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+        <!-- close the pressure valve if the wearer has the affliction "closevalve" while the pressure valve is open -->
+        <StatusEffect type="OnWearing" target="This" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional closevalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+      </GreaterComponent>
+      <!-- Helmet Light Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="200,-100" anchor="BottomCenter" relativesize="0.1,0.08" />
+        <TickBox text="interaction.togglesuitlight">
+          <StatusEffect type="OnUse" target="This" targetitemcomponent="LightComponent" IsOn="true" setvalue="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" targetitemcomponent="LightComponent" IsOn="false" setvalue="true" />
+        </TickBox>
+      </CustomInterface>
+      <!-- Pressure Valve Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="-50,-100" anchor="BottomCenter" relativesize="0.14,0.12" />
+        <Button text="interaction.openpressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true">
+            <Conditional timeframe="eq 1" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+        <Button text="interaction.closepressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true">
+            <Conditional timeframe="eq 0" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+        <sprite name="intercepsuit Suit Helmet Wearable" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.67" hidelimb="false" alphaclipotherwearables="true" sourcerect="686,356,103,103" origin="0.50110054,0.5257158">
+          <LightComponent range="700.0" lightcolor="250,224,165,175" powerconsumption="10" IsOn="false" allowingameediting="false">
+            <Upgrade gameversion="0.1300.0.3" allowingameediting="false" />
+            <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <!-- tag the character with "bothelmet" and "hashelmet" | this prevents the player from dying when switching to a bot in water -->
+        <StatusEffect type="OnWearing" target="Character" tags="hashelmet,bothelmet" setvalue="true" duration="0.1" />
+        <!-- remove the item when it's not contained -->
+        <StatusEffect type="OnNotContained" target="This">
+          <Remove />
+        </StatusEffect>
+        <!-- drop the helmet when the wearer is not a bot, not in water and isn't pressurized -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="false" targetcontainer="true" />
+          <Conditional InWater="false" targetcontainer="true" />
+          <Conditional HasStatusTag="neq pressurized" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+        <!-- drop the helmet if the bot unequips the suit -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="true" targetcontainer="true" />
+          <Conditional HasStatusTag="neq botsuit" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+      </Wearable>
+      <!-- HELMET INVENTORY | spawns with battery and seal for this specific helmet and is locked -->
+      <ItemContainer capacity="0" hideitems="true" spawnwithid="batterycell,suitseal" containedstateindicatorslot="1" allowaccess="false" locked="true">
+        <SlotIcon slotindex="1" texture="%ModDir:3074045632%/Content/Items/Diving/SuitSealIcon.png" sourcerect="0,0,60,55" origin="0.5,0.5" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="mobilebattery" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="seal">
+            <StatusEffect type="OnContaining" target="This,Character" tags="hasseal" setvalue="true" duration="0.1">
+              <RequiredItem items="seal" type="Contained" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+    <!-- Bot Diving Helmet (Liquidator) -->
+    <Item name="" identifier="botliquidatordivingsuithelmet" tags="bothelmet" scale="0.3" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_light" botpriority="1" hideinmenus="true">
+      <InventoryIcon texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="689,271,87,85" origin="0.59,0.51" />
+      <Sprite name="Diving Suit Item" texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="689,271,87,85" depth="0.55" origin="0.59,0.51" />
+      <ItemComponent canbeselected="false" allowingameediting="false">
+        <!-- apply low pass filter when worn -->
+        <StatusEffect type="OnWearing" target="Character" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true" />
+        <!-- obstruct vision -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" setvalue="true" disabledeltatime="true" />
+        <!-- play air breathing sound when not in water -->
+        <StatusEffect type="OnWearing" target="Character" comparison="And">
+          <Conditional InWater="false" />
+          <Conditional IsDead="false" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" volume="1.5" loop="true" />
+        </StatusEffect>
+        <!-- play underwater breathing sound and create bubbles when in water -->
+        <StatusEffect type="OnWearing" target="limb" targetlimb="head" interval="6" duration="0.5" comparison="And">
+          <Conditional InWater="true" />
+          <Conditional IsDead="false" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater1.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater2.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater3.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater4.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <ParticleEmitter particle="risingbubbles" velocitymin="10.0" velocitymax="10.0" scalemin="0.6" scalemax="0.6" particlespersecond="20" />
+        </StatusEffect>
+      </ItemComponent>
+      <!-- GreaterComponent used to toggle between releasing or building up pressure by changing and checking for the timeframe value (1 = closed valve, 0 = open valve) -->
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0">
+        <!-- tag the character and helmet with "sealed" when wearing the suit, the pressure valve is closed and the character has the "hashelmet" and "hasseal" tags -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="sealed" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional HasStatusTag="eq hassuit" />
+          <Conditional HasStatusTag="eq hasseal" />
+        </StatusEffect>
+        <!-- release pressure visually -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="releasepressure" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional vitaltiy="gt 0" />
+        </StatusEffect>
+        <!-- close the pressure valve when worn by a concious bot | NT compatibility -->
+        <StatusEffect type="OnWearing" target="This,Character" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional IsBot="true" />
+          <Conditional sym_unconsciousness="lte 0" />
+        </StatusEffect>
+        <!-- open the pressure valve if the wearer has the affliction "openvalve" while the pressure valve is closed -->
+        <StatusEffect type="OnWearing" target="This" timeframe="0" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional openvalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+        <!-- close the pressure valve if the wearer has the affliction "closevalve" while the pressure valve is open -->
+        <StatusEffect type="OnWearing" target="This" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional closevalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+      </GreaterComponent>
+      <!-- Helmet Light Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="200,-100" anchor="BottomCenter" relativesize="0.1,0.08" />
+        <TickBox text="interaction.togglesuitlight">
+          <StatusEffect type="OnUse" target="This" targetitemcomponent="LightComponent" IsOn="true" setvalue="true" />
+          <StatusEffect type="OnSecondaryUse" target="This" targetitemcomponent="LightComponent" IsOn="false" setvalue="true" />
+        </TickBox>
+      </CustomInterface>
+      <!-- Pressure Valve Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="-50,-100" anchor="BottomCenter" relativesize="0.14,0.12" />
+        <Button text="interaction.openpressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true">
+            <Conditional timeframe="eq 1" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+        <Button text="interaction.closepressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true">
+            <Conditional timeframe="eq 0" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+		<sprite name="highperfhazmat helm Wearable" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.82" hidewearablesoftype="hair,beard" sourcerect="689,271,87,85" origin="0.59,0.51" />
+        <!-- tag the character with "bothelmet" and "hashelmet" | this prevents the player from dying when switching to a bot in water -->
+        <StatusEffect type="OnWearing" target="Character" tags="hashelmet,bothelmet" setvalue="true" duration="0.1" />
+        <!-- remove the item when it's not contained -->
+        <StatusEffect type="OnNotContained" target="This">
+          <Remove />
+        </StatusEffect>
+        <!-- drop the helmet when the wearer is not a bot, not in water and isn't pressurized -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="false" targetcontainer="true" />
+          <Conditional InWater="false" targetcontainer="true" />
+          <Conditional HasStatusTag="neq pressurized" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+        <!-- drop the helmet if the bot unequips the suit -->
+        <StatusEffect type="OnWearing" target="This" comparison="And">
+          <Conditional IsBot="true" targetcontainer="true" />
+          <Conditional HasStatusTag="neq botsuit" targetcontainer="true" />
+          <DropItem />
+        </StatusEffect>
+      </Wearable>
+      <!-- HELMET INVENTORY | spawns with battery and seal for this specific helmet and is locked -->
+      <ItemContainer capacity="0" hideitems="true" spawnwithid="batterycell,suitseal" containedstateindicatorslot="1" allowaccess="false" locked="true">
+        <SlotIcon slotindex="1" texture="%ModDir:3074045632%/Content/Items/Diving/SuitSealIcon.png" sourcerect="0,0,60,55" origin="0.5,0.5" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="mobilebattery" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="seal">
+            <StatusEffect type="OnContaining" target="This,Character" tags="hasseal" setvalue="true" duration="0.1">
+              <RequiredItem items="seal" type="Contained" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+    </Item>
+      <!-- Diving Helmet (Hazmat) -->
+    <Item name="" identifier="hazmatdivingsuithelmet" variantof="divingsuithelmetpreset" hideinmenus="false">
+      <PreferredContainer primary="divingsuitcontainer" secondary="divingcab" />
+	  <Price baseprice="500" sold="false">
+        <Price storeidentifier="merchantoutpost" />
+        <Price storeidentifier="merchantcity" multiplier="0.9" />
+        <Price storeidentifier="merchantresearch" />
+        <Price storeidentifier="merchantmilitary" />
+        <Price storeidentifier="merchantmine" />
+        <Price storeidentifier="merchantengineering" multiplier="0.7" />
+      </Price>
+      <Deconstruct time="10">
+        <Item identifier="rubber" />
+      </Deconstruct>
+      <Fabricate suitablefabricators="fabricator" requiredtime="25">
+        <RequiredSkill identifier="mechanical" level="60" />
+        <Item identifier="lead" amount="1" />
+        <Item identifier="titaniumaluminiumalloy" amount="1" />
+        <Item identifier="rubber" amount="2" />
+      </Fabricate>
+      <InventoryIcon texture="%ModDir:3045796581%/Content/Items/Jobgear/Engineer/HazmatSuit.png" sourcerect="414,160,98,96" origin="0.5,0.5" />
+      <Sprite name="Diving Suit Item" texture="%ModDir:3045796581%/Content/Items/Jobgear/Engineer/HazmatSuit.png" sourcerect="414,160,98,96" depth="0.55" origin="0.5,0.5" />
+      <Wearable>
+        <sprite name="Engineer's Hazmat Head" texture="%ModDir:3045796581%/Content/Items/Jobgear/Engineer/HazmatSuit.png" limb="Head" hidelimb="true" hidewearablesoftype="moustache,beard,hair" hideotherwearables="true" inheritlimbdepth="true" sourcerect="414,160,98,96" scale="0.3" origin="0.55,0.6">
+          <LightComponent range="700.0" lightcolor="250,224,165,175" powerconsumption="10" IsOn="false" allowingameediting="false">
+            <Upgrade gameversion="0.1300.0.3" allowingameediting="false" />
+            <StatusEffect type="OnWearing" target="This" Voltage="1.0" targetslot="0" setvalue="true">
+              <RequiredItem Items="mobilebattery" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Contained" targetslot="0" condition="-0.02">
+              <RequiredItem Items="mobilebattery" type="Contained" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="overheating" damagemultiplier="0.0" />
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn,paralysis" damagemultiplier="0.3" />
+        <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="cyanidepoisoning,deliriuminepoisoning,morbusinepoisoning,sufforinpoisoning,radiationsickness,contaminated" damagemultiplier="0.5" />
+        <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.7" />
+      </Wearable>
+    </Item>
+      <!-- Diving Helmet (Renegade) -->
+    <Item name="" identifier="renegadedivingsuithelmet" variantof="divingsuithelmetpreset" category="Diving" subcategory="Renegade" scale="0.32" hideinmenus="false">
       <Price baseprice="250" soldeverywhere="false"></Price>
       <PreferredContainer primary="divingsuitcontainer" secondary="divingcab" />
       <PreferredContainer primary="wreckedcrewcab,abandonedcrewcab" spawnprobability="0.2" />
@@ -38,11 +854,37 @@
       <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,burn,contaminated,overheating" damagemultiplier="0.8" damagesound="armourmedimpact" />
       <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="armourmedimpact" />
       </Wearable>
+      <!-- HELMET INVENTORY -->
+      <ItemContainer capacity="0" hideitems="true" containedstateindicatorslot="1">
+        <SlotIcon slotindex="1" texture="%ModDir:3074045632%/Content/Items/Diving/SuitSealIcon.png" sourcerect="0,0,60,55" origin="0.5,0.5" />
+        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="mobilebattery" />
+        </SubContainer>
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="seal">
+            <StatusEffect type="OnContaining" target="This,Character" tags="hasseal" setvalue="true" duration="0.2">
+              <RequiredItem items="seal" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This" targetslot="1" playsoundonrequireditemfailure="true" comparison="And" interval="1" forceplaysounds="true">
+              <RequiredItem items="seal" type="Contained" RequireOrMatchOnEmpty="true" />
+              <Conditional condition="lte 3.0" targetcontaineditem="true" />
+              <Conditional timeframe="1" />
+              <Conditional IsLocalPlayer="true" targetcontainer="true" />
+              <Sound file="%ModDir:2764968387%/Sounds/suitalarm.ogg" range="250" loop="true" frequencymultiplier="1.8" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+        <StatusEffect type="OnWearing" target="This" comparison="And" interval="0.25" forceplaysounds="true">
+          <Conditional HasStatusTag="neq sealed" targetcontainer="true" />
+          <Conditional timeframe="1" />
+          <Conditional IsLocalPlayer="true" targetcontainer="true" />
+          <Sound file="%ModDir:2764968387%/Sounds/suitalarm.ogg" range="250" loop="true" frequencymultiplier="1.8" />
+        </StatusEffect>
+      </ItemContainer>
     </Item>
-  </Override>
-  <!-- Combat Helmet -->
-  <Override>
-    <Item name="Diving Helmet (Coalition Combat)" identifier="eacombatdivingsuithelmet" variantof="divingsuithelmetpreset" category="Diving" subcategory="Coalition" scale="0.32" hideinmenus="false">
+      <!-- Diving Helmet (Combat Hardsuit) -->
+    <Item name="" identifier="combathardsuithelmet" variantof="divingsuithelmetpreset" category="Diving" subcategory="Coalition" scale="0.32" hideinmenus="false">
     <Price baseprice="2000" displaynonempty="true" minleveldifficulty="35">
       <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
       <Price storeidentifier="merchantcity" multiplier="1.25" sold="false" />
@@ -90,10 +932,8 @@
       <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,bitewounds,stun,contaminated,overheating" damagemultiplier="0.5" damagesound="armourheavyimpact" />
       </Wearable>
     </Item>
-  </Override>
-  <!-- Interceptor Helmet -->
-  <Override>
-    <Item name="Diving Helmet (Interceptor)" identifier="eainterceptordivingsuithelmet" variantof="divingsuithelmetpreset" category="Diving" scale="0.32" hideinmenus="false">
+      <!-- Diving Helmet (Interceptor) -->
+    <Item name="" identifier="interceptordivingsuithelmet" variantof="divingsuithelmetpreset" category="Diving" scale="0.32" hideinmenus="false">
       <Price baseprice="1250" sold="false"></Price>
     <PreferredContainer primary="divingsuitcontainer" />
     <PreferredContainer primary="piratedivingsuitcontainer" spawnprobability="0.01" minleveldifficulty="35" />
@@ -128,6 +968,164 @@
 		<damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,contaminated,overheating" damagemultiplier="0.6" damagesound="LimbArmor" />
         <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" probabilitymultiplier="0.5" damagesound="LimbArmor" />
       </Wearable>
+    </Item>
+      <!-- Diving Helmet (Liquidator) -->
+    <Item name="" identifier="liquidatorsuithelmet" category="Diving" subcategory="Renegade" tags="mediumitem" scale="0.31" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_light" botpriority="1" hideinmenus="false">
+		<PreferredContainer primary="storagecab" />
+		<PreferredContainer primary="wreckstoragecab,wreckengcab" minamount="0" maxamount="1" spawnprobability="0.007" minleveldifficulty="35" />
+	  <Price baseprice="1000" sold="false"></Price>
+      <Fabricate suitablefabricators="fabricator" requiredtime="15">
+      <RequiredSkill identifier="mechanical" level="50" />
+      <RequiredSkill identifier="electrical" level="85" />
+      <Item identifier="scp_cbrnhelmet" />
+      <Item identifier="scp_durasteel" amount="1" />
+      <Item identifier="lead" amount="4" />
+      <Item identifier="dementonite" amount="4" />
+      </Fabricate>
+      <Deconstruct time="10">
+      <Item identifier="lead" amount="1" />
+      <Item identifier="dementonite" amount="1" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="689,271,87,85" origin="0.59,0.51" />
+      <Sprite name="Diving Suit Item" texture="%ModDir:2764968387%/Jobgear/helmets.png" sourcerect="689,271,87,85" depth="0.55" origin="0.59,0.51" />
+      <Body radius="45" width="34" density="20" />
+      <!-- ItemComponent to store all effects that should apply to all helmets -->
+      <ItemComponent canbeselected="false" allowingameediting="false">
+        <!-- TAGS -->
+        <!-- tag the character with "hashelmet" if it's a player and wearing a diving suit + diving helmet -->
+        <StatusEffect type="OnWearing" target="Character" tags="hashelmet" setvalue="true" interval="0.1" duration="0.2" />
+        <!-- damage suit seal when wearing the helmet in water -->
+        <StatusEffect type="OnWearing" target="Contained" targetslot="1" condition="-0.05">
+          <RequiredItem items="seal" type="Contained" />
+          <Conditional InWater="true" />
+        </StatusEffect>
+        <!-- apply low pass filter when worn -->
+        <StatusEffect type="OnWearing" target="Character" LowPassMultiplier="0.2" setvalue="true" disabledeltatime="true" />
+        <!-- obstruct vision -->
+        <StatusEffect type="OnWearing" target="Character" ObstructVision="true" setvalue="true" disabledeltatime="true" />
+        <!-- play air breathing sound when not in water -->
+        <StatusEffect type="OnWearing" target="Character" comparison="And">
+          <Conditional InWater="false" />
+          <Conditional IsDead="false" />
+          <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" volume="1.5" loop="true" />
+        </StatusEffect>
+        <!-- play underwater breathing sound and create bubbles when in water -->
+        <StatusEffect type="OnWearing" target="limb" targetlimb="head" interval="6" duration="0.5" comparison="And">
+          <Conditional InWater="true" />
+          <Conditional IsDead="false" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater1.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater2.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater3.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/DivingSuitBreathUnderwater4.ogg" range="400" volume="1.5" selectionmode="Random" />
+          <ParticleEmitter particle="risingbubbles" velocitymin="10.0" velocitymax="10.0" scalemin="0.6" scalemax="0.6" particlespersecond="20" />
+        </StatusEffect>
+        <!-- damage the seal if the character has the "damageseal" tag which is applied on taking damage when having any suit pressure affliction | DIsabled
+        <StatusEffect type="OnWearing" target="Character,Contained" targetslot="1" condition="-40">
+          <Conditional HasStatusTag="eq damageseal" />
+        </StatusEffect>
+        -->
+      </ItemComponent>
+      <!-- GreaterComponent used to toggle between releasing or building up pressure by changing and checking for the timeframe value (1 = closed valve, 0 = open valve) -->
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0">
+        <!-- tag the character and helmet with "sealed" when wearing the suit, the pressure valve is closed and the character has the "hashelmet" and "hasseal" tags -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="sealed" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional HasStatusTag="eq hassuit" />
+          <Conditional HasStatusTag="eq hasseal" />
+        </StatusEffect>
+        <!-- release pressure visually -->
+        <StatusEffect type="OnWearing" target="This,Character" tags="releasepressure" interval="0.1" duration="0.2" comparison="And">
+          <Conditional timeframe="eq 0" />
+        </StatusEffect>
+        <!-- open the pressure valve if the wearer has the affliction "openvalve" while the pressure valve is closed -->
+        <StatusEffect type="OnWearing" target="This" timeframe="0" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 1" />
+          <Conditional openvalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+        <!-- close the pressure valve if the wearer has the affliction "closevalve" while the pressure valve is open -->
+        <StatusEffect type="OnWearing" target="This" timeframe="1" setvalue="true" interval="0.1" comparison="And">
+          <Conditional timeframe="eq 0" />
+          <Conditional closevalve="gt 0" targetcontainer="true" />
+          <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+        </StatusEffect>
+      </GreaterComponent>
+      <!-- Pressure Valve Interface -->
+      <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="false">
+        <GuiFrame style="ItemUI" absoluteoffset="-50,-100" anchor="BottomCenter" relativesize="0.14,0.12" />
+        <Button text="interaction.openpressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true">
+            <Conditional timeframe="eq 1" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/OpenValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+        <Button text="interaction.closepressurevalve">
+          <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true">
+            <Conditional timeframe="eq 0" />
+            <Sound file="%ModDir:3074045632%/Content/Items/Diving/CloseValve.ogg" volume="3.5" range="150" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbepicked="true" pickkey="Select" >
+		<sprite name="highperfhazmat helm Wearable" texture="%ModDir:2764968387%/Jobgear/helmets.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.82" hidewearablesoftype="hair,beard" sourcerect="689,271,87,85" origin="0.59,0.51" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="scp_presolatexinfection,scp_hexgasdamage" damagemultiplier="0" probabilitymultiplier="0" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness,contaminated,overheating" damagemultiplier="0.05" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="acidburn,burn" damagemultiplier="0.1" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations,gunshotwound,bitewounds" damagemultiplier="0.75" />
+      <SkillModifier skillidentifier="electrical" skillvalue="10" />
+      <SkillModifier skillidentifier="weapons" skillvalue="-35" />
+      </Wearable>
+      <!--<Holdable slots="RightHand,LeftHand" controlpose="true" holdpos="0,-30" handle1="0,-30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false" canbepicked="true" pickkey="Use" />-->
+      <Throwable slots="RightHand,LeftHand" controlpose="true" holdpos="0,-30" handle1="0,-10" aimable="true" aimpos="0,-30" msg="ItemMsgPickUpUse" throwforce="3.0" canbeselected="false" canbepicked="true" pickkey="Use">
+        <StatusEffect type="OnSecondaryUse" target="This" delay="0.08">
+          <Use />
+        </StatusEffect>
+      </Throwable>
+      <Projectile characterusable="false" launchimpulse="0.0" impulsespread="0.0" sticktocharacters="false" sticktoitems="false" sticktostructures="false" sticktodoors="false">
+        <Attack targetimpulse="3" severlimbsprobability="0.1" itemdamage="0" structuredamage="0" structuresoundtype="StructureSlash">
+          <Affliction identifier="blunttrauma" strength="5" />
+          <Affliction identifier="blunttrauma" strength="5" probability="0.5" />
+          <Affliction identifier="blunttrauma" strength="5" probability="0.25" />
+          <Affliction identifier="blunttrauma" strength="5" probability="0.1" />
+          <Affliction identifier="stun" strength="0.9" />
+          <Affliction identifier="stun" strength="0.9" probability="0.25" />
+        </Attack>
+        <StatusEffect type="OnImpact" target="UseTarget" disabledeltatime="true">
+          <Conditional entitytype="Character" />
+          <Sound file="Content/Items/Weapons/Smack1.ogg" selectionmode="random" range="1000" />
+          <Sound file="Content/Items/Weapons/Smack2.ogg" range="1000" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="LastLimb" disabledeltatime="true">
+          <Conditional limb="Head" />
+          <Affliction identifier="stun" strength="2.5" />
+          <Affliction identifier="concussion" strength="100.0" probability="0.4" />
+        </StatusEffect>
+      </Projectile>
+      <!-- HELMET INVENTORY -->
+      <ItemContainer capacity="0" hideitems="true" containedstateindicatorslot="0">
+        <SlotIcon slotindex="0" texture="%ModDir:3074045632%/Content/Items/Diving/SuitSealIcon.png" sourcerect="0,0,60,55" origin="0.5,0.5" />
+        <SubContainer capacity="1" maxstacksize="1">
+          <Containable items="seal">
+            <StatusEffect type="OnContaining" target="This,Character" tags="hasseal" setvalue="true" duration="0.2">
+              <RequiredItem items="seal" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This" targetslot="1" playsoundonrequireditemfailure="true" comparison="And" interval="1" forceplaysounds="true">
+              <RequiredItem items="seal" type="Contained" RequireOrMatchOnEmpty="true" />
+              <Conditional condition="lte 3.0" targetcontaineditem="true" />
+              <Conditional timeframe="1" />
+              <Conditional IsLocalPlayer="true" targetcontainer="true" />
+              <Sound file="%ModDir:2764968387%/Sounds/suitalarm.ogg" range="250" loop="true" frequencymultiplier="1.8" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+        <StatusEffect type="OnWearing" target="This" comparison="And" interval="0.25" forceplaysounds="true">
+          <Conditional HasStatusTag="neq sealed" targetcontainer="true" />
+          <Conditional timeframe="1" />
+          <Conditional IsLocalPlayer="true" targetcontainer="true" />
+          <Sound file="%ModDir:2764968387%/Sounds/suitalarm.ogg" range="250" loop="true" frequencymultiplier="1.8" />
+        </StatusEffect>
+      </ItemContainer>
+      <aitarget maxsightrange="1500" />
     </Item>
   </Override>
 </Items>
